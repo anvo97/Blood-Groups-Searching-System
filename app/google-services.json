@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "888365642957",
+    "firebase_url": "https://blood-groups-searching-s-6867f.firebaseio.com",
+    "project_id": "blood-groups-searching-s-6867f",
+    "storage_bucket": "blood-groups-searching-s-6867f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888365642957:android:e3ca66787635d2f7",
+        "android_client_info": {
+          "package_name": "com.example.an.bloodgroupssearchingsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888365642957-82jl1umnc7rj210mbl7uiejbcv0ld1b0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.an.bloodgroupssearchingsystem",
+            "certificate_hash": "94d739cdfd3f408136fb362093337ef956383f67"
+          }
+        },
+        {
+          "client_id": "888365642957-puoglt7i7ou79e3llkt4b7ss0gpj29qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMffqnhhlW_MyuzvYd6joQ8yr4yv7FvXg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888365642957-puoglt7i7ou79e3llkt4b7ss0gpj29qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

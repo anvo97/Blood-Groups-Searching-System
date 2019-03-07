@@ -1,0 +1,32 @@
+package com.example.an.bloodgroupssearchingsystem.View.Login;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.example.an.bloodgroupssearchingsystem.R;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        final Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                }catch (Exception e)
+                {
+
+                }finally {
+                    Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+        thread.start();
+    }
+}

@@ -11,4 +11,7 @@
     //Login
     <color name="colorwhite">#fff</color>
     <color name="colorshadow">#cccc</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhiteTransparent">#80ffffff</color>
 </resources>

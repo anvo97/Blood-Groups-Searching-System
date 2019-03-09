@@ -50,7 +50,11 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Fullname"/>
+                    android:hint="Fullname"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"
+                    />
 
             </RelativeLayout>
             <RelativeLayout
@@ -68,7 +72,11 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Email"/>
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:lines="1"
+                    />
 
             </RelativeLayout>
             <RelativeLayout
@@ -86,7 +94,11 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Phone Number"/>
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:lines="1"
+                    />
 
             </RelativeLayout>
             <RelativeLayout
@@ -104,8 +116,35 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Password"/>
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:lines="1"
+                    />
 
+                <ImageButton
+                    android:id="@+id/btn_eye_off"
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/login_btn_eye_off"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="invisible"
+                    android:layout_marginEnd="10dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/btn_eye_on"
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/login_btn_eye_on"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="visible"
+                    android:layout_marginEnd="10dp"
+                    />
 
             </RelativeLayout>
 

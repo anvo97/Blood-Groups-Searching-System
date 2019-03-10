@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.an.bloodgroupssearchingsystem.R;
+import com.example.an.bloodgroupssearchingsystem.View.News.NewsFragment;
 
 public class MenuActivity extends AppCompatActivity {
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/txtContent"
+        android:textColor="#000000"
+        android:text="Việc đưa ra các tiêu chí về sức khỏe, hình thể không phải vì HV có quan điểm phân biệt ngoại hình của người học mà vì tính đặc thù của nghề nghiệp. Hiện nay có 4 khối cơ quan yêu cầu về sức khỏe, thể lực ngay từ khâu tuyển sinh để đào tạo, gồm: quân đội, công an, kiểm sát, tòa án. Với quân đội thì rõ rồi, ai cũng thấy yêu cầu về sức khỏe, thể lực là đương nhiên. Ngoài ra, công an, kiểm sát, tòa án là các khối cơ quan tham gia vào hoạt động tư pháp, gắn liền với các hoạt động phòng chống tội phạm, nên có tính đặc thù trong tuyển sinh và tuyển dụng. Việc các đơn vị đào tạo của các khối ngành này đưa ra tiêu chuẩn về sức khỏe, hình thể để tuyển sinh là để đáp ứng yếu tố đặc thù đó."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/txtContent"
+        android:background="@drawable/imgdetailnews"
+        android:id="@+id/imgDetail"
+        android:layout_width="300dp"
+        android:layout_height="200dp" />
+    <TextView
+        android:id="@+id/txtTitleImage"
+        android:textColor="#000000"
+        android:layout_centerHorizontal="true"
+        android:text="Choose your resolution"
+        android:layout_below="@+id/imgDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

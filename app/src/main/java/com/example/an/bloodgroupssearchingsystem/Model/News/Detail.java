@@ -6,6 +6,9 @@ public class Detail {
     private String titleImage;
     private String imgDetail;
 
+    public Detail(){
+        //danh cho lay du lieu tu firebase
+    }
     public Detail(String idDetail, String content, String titleImage,String imgDetail) {
         this.imgDetail=imgDetail;
         this.idDetail = idDetail;

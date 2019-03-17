@@ -5,6 +5,9 @@ public class News {
     private String title,time;
     private String picture;
 
+    public News(){
+        //danh cho lay du lieu firebase
+    }
     public News(String id,String title, String time, String picture) {
         this.id=id;
         this.title = title;

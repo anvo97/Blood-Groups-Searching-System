@@ -22,7 +22,7 @@
             android:layout_marginTop="140dp"
             android:layout_marginLeft="270dp"
             android:textColor="@color/colorwhite"
-            android:text="Register"
+            android:text="Đăng Ký"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -50,7 +50,7 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Fullname"
+                    android:hint="Tên đầy đủ"
                     android:inputType="text"
                     android:maxLines="1"
                     android:lines="1"
@@ -94,13 +94,36 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Phone Number"
-                    android:inputType="phone"
+                    android:hint="Số điện thoại"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:lines="1"
                     />
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:elevation="5dp"
+                android:background="@drawable/custom_shadow_edt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:paddingLeft="10dp"
+                    android:drawableLeft="@drawable/icoin_address"
+                    android:id="@+id/edtAddress"
+                    android:hint="Địa chỉ"
+                    android:background="@drawable/custom_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"/>
+
+            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -116,7 +139,7 @@
                     android:background="@drawable/custom_edt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Password"
+                    android:hint="Mật khẩu"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:lines="1"
@@ -159,7 +182,7 @@
                     android:textColor="@color/colorwhite"
                     android:id="@+id/txtRegister"
                     android:layout_gravity="center"
-                    android:text="Register"
+                    android:text="Đăng Ký"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ProgressBar
@@ -181,14 +204,14 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/textview"
-                android:text="Already a nember?"
+                android:text="Đã có mật khẩu?"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/txtIntLogin"
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@+id/textview"
-                android:text="Login"
+                android:text="Đăng Nhập"
                 android:textColor="@color/backgroud_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

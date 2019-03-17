@@ -2,6 +2,7 @@ package com.example.an.bloodgroupssearchingsystem.View.Search;
 
 
 import android.os.Bundle;
+import android.support.design.card.MaterialCardView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

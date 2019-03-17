@@ -1,8 +1,10 @@
 package com.example.an.bloodgroupssearchingsystem.View.Register;
 
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -22,11 +25,12 @@ import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.Login.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity implements ViewRegister,View.OnClickListener{
-    private EditText edtFullname,edtEmailRegister,edtPhoneNumber,edtPasswordRegister;
+    private EditText edtFullname,edtEmailRegister,edtPhoneNumber,edtPasswordRegister,edtAddress;
     private FrameLayout btnRegister;
     private TextView txtRegister,txtIntLogin;
     private ProgressBar progressbarRegister;
     private ImageButton btnShowPass, btnHidePass;
+    private Boolean checkinput=false;
 
     private PresenterLogicRegister presenterLogicRegister;
     @Override
@@ -51,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements ViewRegister,
         txtIntLogin=(TextView)findViewById(R.id.txtIntLogin);
         btnHidePass = (ImageButton)findViewById(R.id.btn_eye_off);
         btnShowPass = (ImageButton)findViewById(R.id.btn_eye_on);
+        edtAddress=(EditText)findViewById(R.id.edtAddress);
 
         btnShowPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,16 +78,53 @@ public class RegisterActivity extends AppCompatActivity implements ViewRegister,
 
     @Override
     public void RegisterSuccess() {
+        ResetButton();
         Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void RegisterUnsuccess() {
+        ResetButton();
         Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+    }
+
+    private void ResetButton() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ValueAnimator animator=ValueAnimator.ofInt(btnRegister.getMeasuredWidth(),ResetSizeButton());
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        int val=(Integer)animation.getAnimatedValue();
+                        ViewGroup.LayoutParams layoutParams=btnRegister.getLayoutParams();
+                        layoutParams.width=val;
+                        btnRegister.requestLayout();
+                    }
+                });
+                animator.setDuration(250);
+                animator.start();
+            }
+        },25);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                txtRegister.animate().alpha(1f).start();
+            }
+        },25);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressbarRegister.setVisibility(View.INVISIBLE);
+            }
+        },25);
     }
 
     @Override
     public void CheckInput(Boolean CheckInput) {
+        checkinput=CheckInput;
         Toast.makeText(this, "vui lòng không được để trống", Toast.LENGTH_SHORT).show();
     }
     public int FixSizeButton(){
@@ -97,7 +139,12 @@ public class RegisterActivity extends AppCompatActivity implements ViewRegister,
         final WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         if(v==btnRegister){
             if(wifiManager.isWifiEnabled()){
-                presenterLogicRegister.ResolveRegister(edtFullname.getText().toString(),edtEmailRegister.getText().toString(),edtPhoneNumber.getText().toString(),edtPasswordRegister.getText().toString());
+                presenterLogicRegister.ResolveRegister(edtFullname.getText().toString(),edtEmailRegister.getText().toString(),edtPhoneNumber.getText().toString()
+                        ,edtPasswordRegister.getText().toString(),edtAddress.getText().toString());
+                if(checkinput==false){
+                    AnimatorButton();
+                }
+                checkinput=false;
             }
             else {
                 AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
@@ -123,5 +170,38 @@ public class RegisterActivity extends AppCompatActivity implements ViewRegister,
             Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void AnimatorButton() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ValueAnimator animator=ValueAnimator.ofInt(btnRegister.getMeasuredWidth(),FixSizeButton());
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        int val=(Integer)animation.getAnimatedValue();
+                        ViewGroup.LayoutParams layoutParams=btnRegister.getLayoutParams();
+                        layoutParams.width=val;
+                        btnRegister.requestLayout();
+                    }
+                });
+                animator.setDuration(250);
+                animator.start();
+            }
+        },25);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                txtRegister.animate().alpha(0f).start();
+            }
+        },25);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressbarRegister.setVisibility(View.VISIBLE);
+            }
+        },25);
     }
 }

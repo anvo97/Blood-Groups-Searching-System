@@ -15,15 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.News.DetailActivity"></activity>
-        <activity android:name=".View.Login.MainActivity"></activity>
-        <activity android:name=".View.Login.LoginActivity" />
-        <activity android:name=".View.Register.RegisterActivity" />
-        <activity android:name=".View.Menu.MenuActivity">
+        <activity android:name=".View.Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".View.Login.LoginActivity" />
+        <activity android:name=".View.Register.RegisterActivity" />
+        <activity android:name=".View.Menu.MenuActivity">
+
         </activity>
     </application>
 

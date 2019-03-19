@@ -3,12 +3,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.User.UserFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.UpdateInformation.UserFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="User" />
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@drawable/custom_head_user"
+                android:scaleX="1.4"></FrameLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgAvatarUser"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center|bottom"
+                android:src="@drawable/unnamed"
+                 />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <TextView
+                android:id="@+id/txtFullnameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="Fullname"
+                android:textColor="#000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtEmailUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFullnameUser"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Email"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@+id/btnMyProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_button_user">
+                <TextView
+                    android:text="My Profile"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="23dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                </FrameLayout>
+            <FrameLayout
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/btnMyProfile"
+                android:id="@+id/btnInformationBlood"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/custom_button_user">
+                <TextView
+                    android:text="Information Blood"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="23dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/btnInformationBlood"
+                android:id="@+id/btnChangePW"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/custom_button_user">
+                <TextView
+                    android:text="Change Password"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="23dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

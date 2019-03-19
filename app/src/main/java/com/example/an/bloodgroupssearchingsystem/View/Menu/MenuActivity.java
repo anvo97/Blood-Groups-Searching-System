@@ -1,6 +1,7 @@
 package com.example.an.bloodgroupssearchingsystem.View.Menu;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,9 +15,12 @@ import android.widget.FrameLayout;
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.Blood.BloodFragment;
 import com.example.an.bloodgroupssearchingsystem.View.Donate.DonateFragment;
+import com.example.an.bloodgroupssearchingsystem.View.Login.LoginActivity;
 import com.example.an.bloodgroupssearchingsystem.View.News.NewsFragment;
 import com.example.an.bloodgroupssearchingsystem.View.Search.SearchFragment;
-import com.example.an.bloodgroupssearchingsystem.View.User.UserFragment;
+import com.example.an.bloodgroupssearchingsystem.View.UpdateInformation.UserFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -28,12 +32,27 @@ public class MenuActivity extends AppCompatActivity {
     private BloodFragment bloodFragment;
     private UserFragment userFragment;
     private DonateFragment donateFragment;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        mAuth=FirebaseAuth.getInstance();
+        mAuthListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user=firebaseAuth.getCurrentUser();
+                if(user==null)
+                {
+                    Intent intent=new Intent(MenuActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
 
         mMainNav = (BottomNavigationView)findViewById(R.id.main_nav);
         mMainFrame = (FrameLayout)findViewById(R.id.main_frame);
@@ -82,5 +101,20 @@ public class MenuActivity extends AppCompatActivity {
         @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fratment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener!=null)
+        {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }

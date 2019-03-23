@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.Menu.MenuActivity;
+import com.example.an.bloodgroupssearchingsystem.View.QRCodeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
                 {
 
                 }finally {
-                    Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                    Intent intent=new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
                     finish();
                 }

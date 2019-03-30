@@ -14,15 +14,15 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="nav_search">Search</string>
-    <string name="nav_news">News</string>
-    <string name="nav_blood">Blood</string>
-    <string name="nav_user">User</string>
+    <string name="nav_search">Tìm</string>
+    <string name="nav_news">Sự kiện</string>
+    <string name="nav_blood">Tin tức</string>
+    <string name="nav_user">Người dùng</string>
 
     <dimen name="fix_size">40dp</dimen>
     <dimen name="reset_size">280dp</dimen>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="nav_donate">Donate</string>
+    <string name="nav_donate">Hiến máu</string>
 </resources>

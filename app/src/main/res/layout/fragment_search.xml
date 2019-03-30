@@ -22,32 +22,33 @@
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Group Blood:"
-                android:textSize="30dp"
+                android:text="Nhóm máu:"
+                android:textSize="20dp"
                 android:layout_marginTop="20dp"
                 android:textColor="#000000"
                 />
 
             <RelativeLayout
                 android:id="@+id/rlSpinnerBlood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_below="@id/txtName"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/custom_spinner"
                 >
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerBlood"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:textSize="25dp"
+                    android:textSize="18dp"
                     app:ms_arrow_tint="@color/colorPrimary"
-                    app:ms_hint="Select Group Blood"
-                    android:background="#EBE8E8"
-                    app:ms_text_color="#000000" />
+                    app:ms_hint="Chọn nhóm máu"
+                    android:background="#00000000"
+                    app:ms_text_color="#000000"
+                    />
 
             </RelativeLayout>
 
@@ -55,8 +56,8 @@
                 android:id="@+id/txtQuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="County:"
-                android:textSize="30dp"
+                android:text="Quận:"
+                android:textSize="20dp"
                 android:layout_below="@id/rlSpinnerBlood"
                 android:layout_marginTop="10dp"
                 android:textColor="#000000"
@@ -66,21 +67,21 @@
             <RelativeLayout
                 android:id="@+id/rlSpinnerCounty"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_below="@id/txtQuan"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/custom_spinner"
                 >
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerQuan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:textSize="25dp"
+                    android:textSize="18dp"
                     app:ms_arrow_tint="@color/colorPrimary"
-                    app:ms_hint="Select County"
+                    app:ms_hint="Chọn quận"
                     app:ms_text_color="#000000" />
 
             </RelativeLayout>
@@ -94,10 +95,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rlSpinnerCounty"
                 android:background="@drawable/custom_button"
-                android:text="Search"
-                android:layout_alignParentEnd="true"
+                android:text="Tìm kiếm"
+                android:textColor="#fff"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 />
 
@@ -109,10 +110,10 @@
             android:id="@+id/txt_Result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Result"
+            android:text="Kết quả"
             android:layout_below="@id/rlSearch"
             android:layout_centerHorizontal="true"
-            android:textSize="25dp"
+            android:textSize="18dp"
             android:textColor="#000000"
             android:textStyle="bold"
             android:layout_marginTop="20dp"

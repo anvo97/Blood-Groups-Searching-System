@@ -6,9 +6,440 @@
     tools:context=".View.Donate.DonateFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Donate" />
+        android:background="#fff"
+        >
+
+        <TextView
+            android:id="@+id/txtThongTinHienMau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THÔNG TIN NGƯỜI HIẾN MÁU"
+            android:textColor="@color/backgroud_end"
+            android:textStyle="bold"
+            android:textSize="22dp"
+            android:layout_centerHorizontal="true"
+            />
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtThongTinHienMau"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTen"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl1"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Họ và tên:"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                />
+
+
+            <EditText
+                android:id="@+id/editTen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="#00000000"
+                android:hint="Nhập tên"
+                android:textSize="16dp"
+                android:paddingLeft="115dp"
+                android:textColor="#FF9800"
+                android:textColorHint="#F1BB6B"
+                android:maxLines="1"
+                android:lines="1"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlTen"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlGioiTinh"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl2"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtGioiTinh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giới tính:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                />
+
+            <RadioGroup
+                android:id="@+id/radioGioiTinh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/txtGioiTinh"
+                android:layout_marginStart="40dp"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/radioNam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Nam"
+                    android:textColor="#FF9800"
+                    android:checked="true"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radioNu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Nữ"
+                    android:textColor="#FF9800"
+                    android:checked="false"
+                    />
+
+            </RadioGroup>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl3"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlGioiTinh"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlNgaySinh"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl3"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtNgaySinh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày sinh:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/txt_NgaySinh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="dd/mm/yyyy"
+                android:textColorHint="#F1BB6B"
+                android:textColor="#FF9800"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                android:paddingStart="115dp"
+                />
+
+
+            <Button
+                android:id="@+id/btn_NgaySinh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl4"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlNgaySinh"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlSoDT"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl4"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtSoDT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                />
+
+            <EditText
+                android:id="@+id/editSoDT"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="#00000000"
+                android:hint="Nhập số điện thoại"
+                android:textSize="16dp"
+                android:paddingLeft="115dp"
+                android:textColor="#FF9800"
+                android:textColorHint="#F1BB6B"
+                android:maxLines="1"
+                android:lines="1"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl5"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlSoDT"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlEmail"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl5"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                />
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="#00000000"
+                android:hint="Nhập email"
+                android:textSize="16dp"
+                android:paddingLeft="115dp"
+                android:textColor="#FF9800"
+                android:textColorHint="#F1BB6B"
+                android:maxLines="1"
+                android:lines="1"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl6"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlEmail"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlDiaChi"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl6"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtDiaChi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                />
+
+            <EditText
+                android:id="@+id/editDiaChi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="#00000000"
+                android:hint="Nhập địa chỉ"
+                android:textSize="16dp"
+                android:paddingLeft="115dp"
+                android:textColor="#FF9800"
+                android:textColorHint="#F1BB6B"
+                android:maxLines="1"
+                android:lines="1"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl7"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlDiaChi"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlNgheNghiep"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl7"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtNgheNghiep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nghề nghiệp:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                />
+
+            <EditText
+                android:id="@+id/editNgheNghiep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="#00000000"
+                android:hint="Nhập nghề nghiệp"
+                android:textSize="16dp"
+                android:paddingLeft="115dp"
+                android:textColor="#FF9800"
+                android:textColorHint="#F1BB6B"
+                android:maxLines="1"
+                android:lines="1"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl8"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/rlNgheNghiep"
+            android:background="#fff">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCMND"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl8"
+            android:background="#FAE8CB"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtCMND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số CMND:"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                />
+
+            <EditText
+                android:id="@+id/editCMND"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="#00000000"
+                android:hint="Nhập số CMND"
+                android:textSize="16dp"
+                android:paddingLeft="115dp"
+                android:textColor="#FF9800"
+                android:textColorHint="#F1BB6B"
+                android:maxLines="1"
+                android:lines="1"
+                />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_dangky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng ký"
+            android:textColor="#fff"
+            android:layout_below="@id/rlCMND"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="30dp"
+            />
+
+    </RelativeLayout>
 
 </FrameLayout>

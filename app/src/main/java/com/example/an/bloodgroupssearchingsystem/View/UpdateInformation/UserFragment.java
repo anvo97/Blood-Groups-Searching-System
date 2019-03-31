@@ -40,11 +40,11 @@ public class UserFragment extends Fragment implements ViewUpdate {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_user,container, false);
-//        btnMyProfile=(FrameLayout)view.findViewById(R.id.btnMyProfile);
-//        btnChangePW=(FrameLayout)view.findViewById(R.id.btnChangePW);
-//        imgAvatarUser=(CircleImageView)view.findViewById(R.id.imgAvatarUser);
-//        txtFullnameUser=(TextView)view.findViewById(R.id.txtFullnameUser);
-//        txtEmailUser=(TextView)view.findViewById(R.id.txtEmailUser);
+        btnMyProfile=(FrameLayout)view.findViewById(R.id.btnMyProfile);
+        btnChangePW=(FrameLayout)view.findViewById(R.id.btnChangePW);
+        imgAvatarUser=(CircleImageView)view.findViewById(R.id.imgAvatarUser);
+        txtFullnameUser=(TextView)view.findViewById(R.id.txtFullnameUser);
+        txtEmailUser=(TextView)view.findViewById(R.id.txtEmailUser);
         user= FirebaseAuth.getInstance().getCurrentUser();
         btnMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override

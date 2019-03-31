@@ -3,6 +3,7 @@ package com.example.an.bloodgroupssearchingsystem.View.News;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,6 +34,8 @@ public class NewsFragment extends Fragment implements ViewNews {
     RecyclerView recyclerView;
 
     private String id;
+    private String TitleNews;
+    private String Time;
 
 
     public NewsFragment() {
@@ -54,23 +57,22 @@ public class NewsFragment extends Fragment implements ViewNews {
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),DetailActivity.class);
                 intent.putExtra("IDItemList",id);
+                intent.putExtra("Titlenews",TitleNews);
+                intent.putExtra("Time",Time);
                 startActivity(intent);
             }
         });
-
         presenterLogicNews.LoadData();
         return view;
-
     }
-
 
     @Override
     public void DisplayNews(ArrayList<News> listnNews) {
-        top_title.setText(listnNews.get(0).getTitle());
-        id=listnNews.get(0).getId();
-        Picasso.get().load(listnNews.get(0).getPicture()).into(kenBurnsView);
-        presenterLogicNews.InnitView(recyclerView,listnNews);
-
+                top_title.setText(listnNews.get(0).getTitle());
+                id=listnNews.get(0).getId();
+                TitleNews=listnNews.get(0).getTitle();
+                Time=listnNews.get(0).getTime();
+                Picasso.get().load(listnNews.get(0).getImage()).into(kenBurnsView);
+                presenterLogicNews.InnitView(recyclerView,listnNews);
     }
-
 }

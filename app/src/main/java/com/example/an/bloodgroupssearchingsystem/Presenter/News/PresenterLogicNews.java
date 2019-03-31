@@ -17,6 +17,7 @@ import com.example.an.bloodgroupssearchingsystem.View.News.ViewDetailNews;
 import com.example.an.bloodgroupssearchingsystem.View.News.ViewNews;
 
 import java.util.ArrayList;
+import java.util.concurrent.Delayed;
 
 public class PresenterLogicNews implements PresenterImpNews, LoadNewsLister {
     private ModelNews modelNews;
@@ -50,6 +51,7 @@ public class PresenterLogicNews implements PresenterImpNews, LoadNewsLister {
         recyclerView.setLayoutManager(layoutManager);
         NewsAdapter newsAdapter=new NewsAdapter(listNews,recyclerView.getContext());
         recyclerView.setAdapter(newsAdapter);
+        newsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -67,7 +69,8 @@ public class PresenterLogicNews implements PresenterImpNews, LoadNewsLister {
     }
 
     @Override
-    public void LoadDataDetail() {
-        modelNews.getDataDetailNews();
+    public void LoadDataDetail(String x) {
+        modelNews.getDataDetailNews(x);
     }
+
 }

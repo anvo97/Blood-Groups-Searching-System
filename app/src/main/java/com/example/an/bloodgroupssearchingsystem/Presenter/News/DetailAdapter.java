@@ -52,7 +52,7 @@ public class DetailAdapter extends RecyclerView.Adapter<ViewHolderDetail> {
     public void onBindViewHolder(@NonNull ViewHolderDetail viewHolderDetail, int i) {
         viewHolderDetail.txtContext.setText(listDetilNews.get(i).getContent());
         viewHolderDetail.txtTitleImage.setText(listDetilNews.get(i).getTitleImage());
-        Picasso.get().load(listDetilNews.get(i).getImgDetail()).into(viewHolderDetail.imgDetail);
+        Picasso.get().load(listDetilNews.get(i).getImageDetail()).into(viewHolderDetail.imgDetail);
     }
 
     @Override

@@ -16,16 +16,17 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imgItemView"
             android:layout_width="120dp"
-            android:scaleType="center"
-            android:layout_height="98dp" />
+            android:scaleType="fitCenter"
+            android:layout_height="98dp"
+            />
         <TextView
             android:textStyle="bold"
             android:textColor="#030303"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="150dp"
             android:text="Captain America: Civil War"
             android:id="@+id/txtTitleItem"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView

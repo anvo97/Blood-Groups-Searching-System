@@ -11,5 +11,5 @@ public interface PresenterImpNews {
     void InnitView(RecyclerView recyclerView, ArrayList<News> listNews);
     void LoadData();
     void InnitViewDetail(RecyclerView recyclerView,ArrayList<Detail> listNews);
-    void LoadDataDetail();
+    void LoadDataDetail(String x);
 }

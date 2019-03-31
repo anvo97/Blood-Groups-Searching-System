@@ -3,25 +3,18 @@ package com.example.an.bloodgroupssearchingsystem.Model.News;
 public class Detail {
     private String idDetail;
     private String content;
-    private String titleImage;
-    private String imgDetail;
+    private String TitleImage;
+    private String ImageDetail;
 
     public Detail(){
         //danh cho lay du lieu tu firebase
     }
-    public Detail(String idDetail, String content, String titleImage,String imgDetail) {
-        this.imgDetail=imgDetail;
+
+    public Detail(String idDetail, String content, String titleImage, String imageDetail) {
         this.idDetail = idDetail;
         this.content = content;
-        this.titleImage = titleImage;
-    }
-
-    public String getImgDetail() {
-        return imgDetail;
-    }
-
-    public void setImgDetail(String imgDetail) {
-        this.imgDetail = imgDetail;
+        TitleImage = titleImage;
+        ImageDetail = imageDetail;
     }
 
     public String getIdDetail() {
@@ -41,10 +34,18 @@ public class Detail {
     }
 
     public String getTitleImage() {
-        return titleImage;
+        return TitleImage;
     }
 
     public void setTitleImage(String titleImage) {
-        this.titleImage = titleImage;
+        TitleImage = titleImage;
+    }
+
+    public String getImageDetail() {
+        return ImageDetail;
+    }
+
+    public void setImageDetail(String imageDetail) {
+        ImageDetail = imageDetail;
     }
 }

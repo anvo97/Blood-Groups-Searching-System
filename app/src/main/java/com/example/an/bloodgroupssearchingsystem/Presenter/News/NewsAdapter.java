@@ -62,16 +62,17 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolderNews>{
     public void onBindViewHolder(@NonNull ViewHolderNews viewHolder, int i) {
         viewHolder.txtTitleItem.setText(listNews.get(i).getTitle());
         viewHolder.txtTimeItem.setText(listNews.get(i).getTime());
-        Picasso.get().load(listNews.get(i).getPicture()).into(viewHolder.imgItemView);
+        Picasso.get().load(listNews.get(i).getImage()).into(viewHolder.imgItemView);
         viewHolder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean islongClick) {
                 Intent intent=new Intent(context, DetailActivity.class);
                 intent.putExtra("IDItemList",listNews.get(position).getId());
+                intent.putExtra("Titlenews",listNews.get(position).getTitle());
+                intent.putExtra("Time",listNews.get(position).getTime());
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

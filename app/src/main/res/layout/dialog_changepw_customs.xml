@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center|top"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/edtNewPW"
+        android:layout_width="256dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:hint="New Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/edtVerifyPW"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Verify Password"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        />
+
+</LinearLayout>

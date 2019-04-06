@@ -5,25 +5,36 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.an.bloodgroupssearchingsystem.Presenter.Donate.PresenterLogicDonateBlood;
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.UpdateInformation.MyProfileActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -42,8 +53,14 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     private RadioGroup radioGroup;
     private RadioButton radio_Nam, radio_Nu;
     private Calendar calendar;
-    private boolean daTungHienMau, benhManTinh, sutCan, noiHach, chuaRang, xamMinh, duocChuyenMau,
-            maTuy, quanHeHIV, tiemVacXin, vungCoDich, biCum, dungThuocKhangSinh, khamBacSy, chatDocDaCam, coThai;
+    private boolean DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
+            QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai;
+    private Spinner spinnerList, spinnerListSuKien;
+    private ArrayList<String> arraySpinner, arraySpinnerSuKien;
+    private ArrayAdapter<String> arrayAdapter, arrayAdapterSuKien;
+    private RelativeLayout rlSukien;
+    private DatabaseReference mData;
+    private String ChuongTrinh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +79,8 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGioiTinh);
         radio_Nam = (RadioButton) view.findViewById(R.id.radioNam);
         radio_Nu = (RadioButton) view.findViewById(R.id.radioNu);
+        rlSukien = (RelativeLayout) view.findViewById(R.id.rlSuKien);
+        mData = FirebaseDatabase.getInstance().getReference();
 
         radio_Nam.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -84,25 +103,88 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
             }
         });
 
+        spinnerList = (Spinner) view.findViewById(R.id.spinner);
+        arraySpinner = new ArrayList<String>();
+
+        arraySpinner.add("Bệnh viện");
+        arraySpinner.add("Sự kiện");
+        arraySpinner.add("Tư nhân");
+
+
+        arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_textview, arraySpinner);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_textview);
+
+        spinnerList.setAdapter(arrayAdapter);
+
+        spinnerListSuKien = (Spinner) view.findViewById(R.id.spinnerSuKien);
+        arraySpinnerSuKien = new ArrayList<String>();
+
+        mData.child("Event").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> nodeChild = dataSnapshot.getChildren();
+                for (DataSnapshot child : nodeChild) {
+                    Event event = child.getValue(Event.class);
+                    arraySpinnerSuKien.add(event.Name);
+                }
+                arrayAdapterSuKien = new ArrayAdapter<>(getContext(), R.layout.spinner_textview, arraySpinnerSuKien);
+                arrayAdapterSuKien.setDropDownViewResource(R.layout.spinner_textview);
+                spinnerListSuKien.setAdapter(arrayAdapterSuKien);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mapping();
+
         btnDangKy.setOnClickListener(this);
         return view;
     }
 
-    // Khi radio button có thay đổi.
+    private void mapping() {
+        spinnerList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinnerList.getSelectedItem().toString().equals("Bệnh viện")) {
+                    ChuongTrinh = (String) parent.getItemAtPosition(position);
+                    rlSukien.setVisibility(View.INVISIBLE);
+                    spinnerList.setSelection(position);
+                } else if (spinnerList.getSelectedItem().toString().equals("Sự kiện")) {
+                    rlSukien.setVisibility(View.VISIBLE);
+                    spinnerList.setSelection(position);
+                    ChuongTrinh = "Sự kiện: " + spinnerListSuKien.getSelectedItem().toString();
+                    spinnerListSuKien.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int po, long id) {
+                            ChuongTrinh = "Sự kiện: " + (String) parent.getItemAtPosition(po);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                } else {
+                    ChuongTrinh = (String) parent.getItemAtPosition(position);
+                    rlSukien.setVisibility(View.INVISIBLE);
+                    spinnerList.setSelection(position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void doOnGameCharacterChanged(CompoundButton buttonView, boolean isChecked) {
         RadioButton radio = (RadioButton) buttonView;
     }
-
-    // Khi button "Dang Ky" bị nhấn.
-//    private void doDangKy()  {
-//        int gameCharacter = this.radioGroup.getCheckedRadioButtonId();
-//
-//        RadioButton radioButtonGameCharacter = (RadioButton) DonateFragment.this.findViewById(gameCharacter);
-//
-//        String message ="Game Character: " + radioButtonGameCharacter.getText() ;
-//
-//        Toast.makeText(DonateFragment.this,message,Toast.LENGTH_LONG).show();
-//    }
 
     public void pickDate() {
         calendar = Calendar.getInstance();
@@ -134,26 +216,25 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     public void onClick(View v) {
 
         if (v == btnDangKy) {
-            final String name = edtTen.getText().toString();
-            final String birthday = txtNgaySinh.getText().toString();
-            final String phone = edtSDT.getText().toString();
-            final String email = edtEmail.getText().toString();
-            final String diachi = edtDiaChi.getText().toString();
-            final String nghenghiep = edtNgheNghiep.getText().toString();
+            final String Name = edtTen.getText().toString();
+            final String DateOfBirth = txtNgaySinh.getText().toString();
+            final String Phone = edtSDT.getText().toString();
+            final String Email = edtEmail.getText().toString();
+            final String Diachi = edtDiaChi.getText().toString();
+            final String NgheNghiep = edtNgheNghiep.getText().toString();
             final String CMND = edtCMND.getText().toString();
-            final String gender;
+            final String Gender;
             if (radio_Nam.isChecked()) {
-                gender = radio_Nam.getText().toString();
+                Gender = radio_Nam.getText().toString();
             } else {
-                gender = radio_Nu.getText().toString();
+                Gender = radio_Nu.getText().toString();
             }
-            if (presenterLogicDonateBlood.checkInput(name, gender, birthday, phone, email, diachi, nghenghiep, CMND) == false) {
+            if (presenterLogicDonateBlood.checkInput(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND) == false) {
 
             } else {
-                presenterLogicDonateBlood.ResolveRegisterDonateBlood(name, gender, birthday, phone, email, diachi, nghenghiep, CMND);
-                presenterLogicDonateBlood.ResolveRegisterDonateBlood2(daTungHienMau, benhManTinh, sutCan, noiHach, chuaRang,
-                        xamMinh, duocChuyenMau, maTuy, quanHeHIV, tiemVacXin, vungCoDich, biCum, dungThuocKhangSinh,
-                        khamBacSy, chatDocDaCam, coThai);
+                presenterLogicDonateBlood.ResolveRegisterDonateBlood(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND);
+                presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
+                        QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
                 startActivity(new Intent(getContext(), PhieuDangKy.class));
             }
         }

@@ -27,8 +27,8 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
             radioKhong3, radioKhong4, radioKhong5, radioKhong6, radioKhong7, radioKhong8, radioKhong9, radioKhong10,
             radioKhong11, radioKhong12, radioKhong13, radioKhong14, radioKhong15, radioKhong16;
     private Button btnPhieuDangKy;
-    private boolean daTungHienMau, benhManTinh, sutCan, noiHach, chuaRang, xamMinh, duocChuyenMau,
-            maTuy, quanHeHIV, tiemVacXin, vungCoDich, biCum, dungThuocKhangSinh, khamBacSy, chatDocDaCam, coThai;
+    private boolean DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
+            QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -294,88 +294,87 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
     public void onClick(View v){
         if(v == btnPhieuDangKy){
             if (radioCo1.isChecked()) {
-                daTungHienMau = true;
+                DaTungHienMau = true;
             } else {
-                daTungHienMau = false;
+                DaTungHienMau = false;
             }
             if (radioCo2.isChecked()) {
-                benhManTinh = true;
+                BenhManTinh = true;
             } else {
-                benhManTinh = false;
+                BenhManTinh = false;
             }
             if (radioCo3.isChecked()) {
-                sutCan = true;
+                SutCan = true;
             } else {
-                sutCan = false;
+                SutCan = false;
             }
             if (radioCo4.isChecked()) {
-                noiHach = true;
+                NoiHach = true;
             } else {
-                noiHach = false;
+                NoiHach = false;
             }
             if (radioCo5.isChecked()) {
-                chuaRang = true;
+                ChuaRang = true;
             } else {
-                chuaRang = false;
+                ChuaRang = false;
             }
             if (radioCo6.isChecked()) {
-                xamMinh = true;
+                XamMinh = true;
             } else {
-                xamMinh = false;
+                XamMinh = false;
             }
             if (radioCo7.isChecked()) {
-                duocChuyenMau = true;
+                DuocChuyenMau = true;
             } else {
-                duocChuyenMau = false;
+                DuocChuyenMau = false;
             }
             if (radioCo8.isChecked()) {
-                maTuy = true;
+                MaTuy = true;
             } else {
-                maTuy = false;
+                MaTuy = false;
             }
             if (radioCo9.isChecked()) {
-                quanHeHIV = true;
+                QuanHeHIV = true;
             } else {
-                quanHeHIV = false;
+                QuanHeHIV = false;
             }
             if (radioCo10.isChecked()) {
-                tiemVacXin = true;
+                TiemVacXin = true;
             } else {
-                tiemVacXin = false;
+                TiemVacXin = false;
             }
             if (radioCo11.isChecked()) {
-                vungCoDich = true;
+                VungCoDich = true;
             } else {
-                vungCoDich = false;
+                VungCoDich = false;
             }
             if (radioCo12.isChecked()) {
-                biCum = true;
+                BiCum = true;
             } else {
-                biCum = false;
+                BiCum = false;
             }
             if (radioCo13.isChecked()) {
-                dungThuocKhangSinh = true;
+                DungThuocKhangSinh = true;
             } else {
-                dungThuocKhangSinh = false;
+                DungThuocKhangSinh = false;
             }
             if (radioCo14.isChecked()) {
-                khamBacSy = true;
+                KhamBacSy = true;
             } else {
-                khamBacSy = false;
+                KhamBacSy = false;
             }
             if (radioCo15.isChecked()) {
-                chatDocDaCam = true;
+                ChatDocDaCam = true;
             } else {
-                chatDocDaCam = false;
+                ChatDocDaCam = false;
             }
             if (radioCo16.isChecked()) {
-                coThai = true;
+                CoThai = true;
             } else {
-                coThai = false;
+                CoThai = false;
             }
-            presenterLogicDonateBlood.ResolveRegisterDonateBlood2(daTungHienMau, benhManTinh, sutCan, noiHach, chuaRang,
-                    xamMinh, duocChuyenMau, maTuy, quanHeHIV, tiemVacXin, vungCoDich, biCum, dungThuocKhangSinh,
-                    khamBacSy, chatDocDaCam, coThai);
+            presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
+                    QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
         }
     }
 

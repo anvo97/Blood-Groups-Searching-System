@@ -1,14 +1,14 @@
 package com.example.an.bloodgroupssearchingsystem.Presenter.Donate;
 
 public interface PresenterDonateBlood {
-    void ResolveRegisterDonateBlood(String name, String gender, String dateOfBirth, String phone, String email, String diachi,
-                                    String ngheNghiep, String soCMND);
+    void ResolveRegisterDonateBlood(String ChuongTrinh, String Name, String Gender, String DateOfBirth, String Phone, String Email, String Diachi,
+                                    String NgheNghiep, String CMND);
 
-    void ResolveRegisterDonateBlood2(boolean daTungHienMau, boolean benhManTinh,
-                                     boolean sutCan, boolean noiHach, boolean chuaRang, boolean xamMinh, boolean duocChuyenMau,
-                                     boolean maTuy, boolean quanHeHIV, boolean tiemVacXin, boolean vungCoDich, boolean biCum,
-                                     boolean dungThuocKhangSinh, boolean khamBacSy, boolean chatDocDaCam, boolean coThai);
+    void ResolveRegisterDonateBlood2(boolean DaTungHienMau, boolean BenhManTinh,
+                                     boolean SutCan, boolean NoiHach, boolean ChuaRang, boolean XamMinh, boolean DuocChuyenMau,
+                                     boolean MaTuy, boolean QuanHeHIV, boolean TiemVacXin, boolean VungCoDich, boolean BiCum,
+                                     boolean DungThuocKhangSinh, boolean KhamBacSy, boolean ChatDocDaCam, boolean CoThai);
 
-    boolean checkInput(String name, String gender, String dateOfBirth, String phone, String email, String diachi,
-                       String ngheNghiep, String soCMND);
+    boolean checkInput(String ChuongTrinh, String Name, String Gender, String DateOfBirth, String Phone, String Email, String Diachi,
+                       String NgheNghiep, String CMND);
 }

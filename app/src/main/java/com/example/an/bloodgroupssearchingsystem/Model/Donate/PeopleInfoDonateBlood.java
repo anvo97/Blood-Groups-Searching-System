@@ -1,170 +1,170 @@
 package com.example.an.bloodgroupssearchingsystem.Model.Donate;
 
 public class PeopleInfoDonateBlood {
-    private boolean daTungHienMau;
-    private boolean benhManTinh;
-    private boolean sutCan;
-    private boolean noiHach;
-    private boolean chuaRang;
-    private boolean xamMinh;
-    private boolean duocChuyenMau;
-    private boolean maTuy;
-    private boolean quanHeHIV;
-    private boolean tiemVacXin;
-    private boolean vungCoDich;
-    private boolean biCum;
-    private boolean dungThuocKhangSinh;
-    private boolean khamBacSy;
-    private boolean chatDocDaCam;
-    private boolean coThai;
+    private boolean DaTungHienMau;
+    private boolean BenhManTinh;
+    private boolean SutCan;
+    private boolean NoiHach;
+    private boolean ChuaRang;
+    private boolean XamMinh;
+    private boolean DuocChuyenMau;
+    private boolean MaTuy;
+    private boolean QuanHeHIV;
+    private boolean TiemVacXin;
+    private boolean VungCoDich;
+    private boolean BiCum;
+    private boolean DungThuocKhangSinh;
+    private boolean KhamBacSy;
+    private boolean ChatDocDaCam;
+    private boolean CoThai;
 
-    public PeopleInfoDonateBlood(boolean daTungHienMau, boolean benhManTinh,boolean sutCan, boolean noiHach,
-                             boolean chuaRang, boolean xamMinh, boolean duocChuyenMau,
-                             boolean maTuy, boolean quanHeHIV, boolean tiemVacXin, boolean vungCoDich, boolean biCum,
-                             boolean dungThuocKhangSinh, boolean khamBacSy, boolean chatDocDaCam, boolean coThai) {
-        this.daTungHienMau = daTungHienMau;
-        this.benhManTinh = benhManTinh;
-        this.sutCan = sutCan;
-        this.noiHach = noiHach;
-        this.chuaRang = chuaRang;
-        this.xamMinh = xamMinh;
-        this.duocChuyenMau = duocChuyenMau;
-        this.maTuy = maTuy;
-        this.quanHeHIV = quanHeHIV;
-        this.tiemVacXin = tiemVacXin;
-        this.vungCoDich = vungCoDich;
-        this.biCum = biCum;
-        this.dungThuocKhangSinh = dungThuocKhangSinh;
-        this.khamBacSy = khamBacSy;
-        this.chatDocDaCam = chatDocDaCam;
-        this.coThai = coThai;
+    public PeopleInfoDonateBlood(boolean DaTungHienMau, boolean BenhManTinh,
+                                 boolean SutCan, boolean NoiHach, boolean ChuaRang, boolean XamMinh, boolean DuocChuyenMau,
+                                 boolean MaTuy, boolean QuanHeHIV, boolean TiemVacXin, boolean VungCoDich, boolean BiCum,
+                                 boolean DungThuocKhangSinh, boolean KhamBacSy, boolean ChatDocDaCam, boolean CoThai) {
+        this.DaTungHienMau = DaTungHienMau;
+        this.BenhManTinh = BenhManTinh;
+        this.SutCan = SutCan;
+        this.NoiHach = NoiHach;
+        this.ChuaRang = ChuaRang;
+        this.XamMinh = XamMinh;
+        this.DuocChuyenMau = DuocChuyenMau;
+        this.MaTuy = MaTuy;
+        this.QuanHeHIV = QuanHeHIV;
+        this.TiemVacXin = TiemVacXin;
+        this.VungCoDich = VungCoDich;
+        this.BiCum = BiCum;
+        this.DungThuocKhangSinh = DungThuocKhangSinh;
+        this.KhamBacSy = KhamBacSy;
+        this.ChatDocDaCam = ChatDocDaCam;
+        this.CoThai = CoThai;
     }
 
     public boolean isDaTungHienMau() {
-        return daTungHienMau;
+        return DaTungHienMau;
     }
 
     public void setDaTungHienMau(boolean daTungHienMau) {
-        this.daTungHienMau = daTungHienMau;
+        DaTungHienMau = daTungHienMau;
     }
 
     public boolean isBenhManTinh() {
-        return benhManTinh;
+        return BenhManTinh;
     }
 
     public void setBenhManTinh(boolean benhManTinh) {
-        this.benhManTinh = benhManTinh;
+        BenhManTinh = benhManTinh;
     }
 
     public boolean isSutCan() {
-        return sutCan;
+        return SutCan;
     }
 
     public void setSutCan(boolean sutCan) {
-        this.sutCan = sutCan;
+        SutCan = sutCan;
     }
 
     public boolean isNoiHach() {
-        return noiHach;
+        return NoiHach;
     }
 
     public void setNoiHach(boolean noiHach) {
-        this.noiHach = noiHach;
+        NoiHach = noiHach;
     }
 
     public boolean isChuaRang() {
-        return chuaRang;
+        return ChuaRang;
     }
 
     public void setChuaRang(boolean chuaRang) {
-        this.chuaRang = chuaRang;
+        ChuaRang = chuaRang;
     }
 
     public boolean isXamMinh() {
-        return xamMinh;
+        return XamMinh;
     }
 
     public void setXamMinh(boolean xamMinh) {
-        this.xamMinh = xamMinh;
+        XamMinh = xamMinh;
     }
 
     public boolean isDuocChuyenMau() {
-        return duocChuyenMau;
+        return DuocChuyenMau;
     }
 
     public void setDuocChuyenMau(boolean duocChuyenMau) {
-        this.duocChuyenMau = duocChuyenMau;
+        DuocChuyenMau = duocChuyenMau;
     }
 
     public boolean isMaTuy() {
-        return maTuy;
+        return MaTuy;
     }
 
     public void setMaTuy(boolean maTuy) {
-        this.maTuy = maTuy;
+        MaTuy = maTuy;
     }
 
     public boolean isQuanHeHIV() {
-        return quanHeHIV;
+        return QuanHeHIV;
     }
 
     public void setQuanHeHIV(boolean quanHeHIV) {
-        this.quanHeHIV = quanHeHIV;
+        QuanHeHIV = quanHeHIV;
     }
 
     public boolean isTiemVacXin() {
-        return tiemVacXin;
+        return TiemVacXin;
     }
 
     public void setTiemVacXin(boolean tiemVacXin) {
-        this.tiemVacXin = tiemVacXin;
+        TiemVacXin = tiemVacXin;
     }
 
     public boolean isVungCoDich() {
-        return vungCoDich;
+        return VungCoDich;
     }
 
     public void setVungCoDich(boolean vungCoDich) {
-        this.vungCoDich = vungCoDich;
+        VungCoDich = vungCoDich;
     }
 
     public boolean isBiCum() {
-        return biCum;
+        return BiCum;
     }
 
     public void setBiCum(boolean biCum) {
-        this.biCum = biCum;
+        BiCum = biCum;
     }
 
     public boolean isDungThuocKhangSinh() {
-        return dungThuocKhangSinh;
+        return DungThuocKhangSinh;
     }
 
     public void setDungThuocKhangSinh(boolean dungThuocKhangSinh) {
-        this.dungThuocKhangSinh = dungThuocKhangSinh;
+        DungThuocKhangSinh = dungThuocKhangSinh;
     }
 
     public boolean isKhamBacSy() {
-        return khamBacSy;
+        return KhamBacSy;
     }
 
     public void setKhamBacSy(boolean khamBacSy) {
-        this.khamBacSy = khamBacSy;
+        KhamBacSy = khamBacSy;
     }
 
     public boolean isChatDocDaCam() {
-        return chatDocDaCam;
+        return ChatDocDaCam;
     }
 
     public void setChatDocDaCam(boolean chatDocDaCam) {
-        this.chatDocDaCam = chatDocDaCam;
+        ChatDocDaCam = chatDocDaCam;
     }
 
     public boolean isCoThai() {
-        return coThai;
+        return CoThai;
     }
 
     public void setCoThai(boolean coThai) {
-        this.coThai = coThai;
+        CoThai = coThai;
     }
 }

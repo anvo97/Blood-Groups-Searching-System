@@ -2,89 +2,98 @@ package com.example.an.bloodgroupssearchingsystem.Model.Donate;
 
 public class PeopleDonateBlood {
 
-    private String name;
-    private String gender;
-    private String dateOfBirth;
-    private String phone;
-    private String email;
-    private String diachi;
-    private String ngheNghiep;
-    private String soCMND;
+    private String ChuongTrinh;
+    private String Name;
+    private String Gender;
+    private String DateOfBirth;
+    private String Phone;
+    private String Email;
+    private String Diachi;
+    private String NgheNghiep;
+    private String CMND;
 
+    public PeopleDonateBlood(String ChuongTrinh, String Name, String Gender, String DateOfBirth, String Phone, String Email, String Diachi,
+                             String NgheNghiep, String CMND) {
+        this.ChuongTrinh = ChuongTrinh;
+        this.Name = Name;
+        this.Gender = Gender;
+        this.DateOfBirth = DateOfBirth;
+        this.Phone = Phone;
+        this.Email = Email;
+        this.Diachi = Diachi;
+        this.NgheNghiep = NgheNghiep;
+        this.CMND = CMND;
+    }
 
-    public PeopleDonateBlood(String name, String gender, String dateOfBirth, String phone, String email,
-                             String diachi, String ngheNghiep, String soCMND) {
-        this.name = name;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.phone = phone;
-        this.email = email;
-        this.diachi = diachi;
-        this.ngheNghiep = ngheNghiep;
-        this.soCMND = soCMND;
+    public String getChuongTrinh() {
+        return ChuongTrinh;
+    }
+
+    public void setChuongTrinh(String ChuongTrinh) {
+        this.ChuongTrinh = ChuongTrinh;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public String getGender() {
-        return gender;
+        return Gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGender(String Gender) {
+        this.Gender = Gender;
     }
 
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return DateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDateOfBirth(String DateOfBirth) {
+        this.DateOfBirth = DateOfBirth;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String Phone) {
+        this.Phone = Phone;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getDiachi() {
-        return diachi;
+        return Diachi;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
+    public void setDiachi(String Diachi) {
+        this.Diachi = Diachi;
     }
 
     public String getNgheNghiep() {
-        return ngheNghiep;
+        return NgheNghiep;
     }
 
-    public void setNgheNghiep(String ngheNghiep) {
-        this.ngheNghiep = ngheNghiep;
+    public void setNgheNghiep(String NgheNghiep) {
+        this.NgheNghiep = NgheNghiep;
     }
 
-    public String getSoCMND() {
-        return soCMND;
+    public String getCMND() {
+        return CMND;
     }
 
-    public void setSoCMND(String soCMND) {
-        this.soCMND = soCMND;
+    public void setCMND(String CMND) {
+        this.CMND = CMND;
     }
 }

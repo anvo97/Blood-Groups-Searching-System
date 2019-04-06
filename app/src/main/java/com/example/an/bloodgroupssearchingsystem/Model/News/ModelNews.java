@@ -33,6 +33,7 @@ public class ModelNews {
                     news.setId(chile.getKey());
                     listNews.add(news);
                 }
+                Log.d("AAA",listNews.get(0).getTitle());
                 loadNewsLister.onLoadNewsSuccess(listNews);
             }
 

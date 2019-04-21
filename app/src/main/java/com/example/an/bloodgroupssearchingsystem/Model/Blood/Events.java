@@ -1,6 +1,9 @@
 package com.example.an.bloodgroupssearchingsystem.Model.Blood;
 
-public class Events {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Events implements Parcelable {
     private String id;
     private String Name;
     private String Time;
@@ -21,6 +24,28 @@ public class Events {
         this.content = content;
         this.place = place;
     }
+
+    protected Events(Parcel in) {
+        id = in.readString();
+        Name = in.readString();
+        Time = in.readString();
+        TimePost = in.readString();
+        Title = in.readString();
+        content = in.readString();
+        place = in.readString();
+    }
+
+    public static final Creator<Events> CREATOR = new Creator<Events>() {
+        @Override
+        public Events createFromParcel(Parcel in) {
+            return new Events(in);
+        }
+
+        @Override
+        public Events[] newArray(int size) {
+            return new Events[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -76,5 +101,21 @@ public class Events {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(Name);
+        dest.writeString(Time);
+        dest.writeString(TimePost);
+        dest.writeString(Title);
+        dest.writeString(content);
+        dest.writeString(place);
     }
 }

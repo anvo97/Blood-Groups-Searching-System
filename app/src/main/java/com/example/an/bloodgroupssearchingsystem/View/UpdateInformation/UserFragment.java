@@ -116,7 +116,7 @@ public class UserFragment extends Fragment implements ViewUpdate {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(edtNewPW.getText().toString().equals("")|| edtVerifyPW.getText().toString().equals(""))
                 {
                     Toast.makeText(getContext(), "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
@@ -129,7 +129,7 @@ public class UserFragment extends Fragment implements ViewUpdate {
                     }
                     else
                     {
-                        mAuth.updatePassword(edtNewPW.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        user.updatePassword(edtNewPW.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){

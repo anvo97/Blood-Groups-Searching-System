@@ -15,8 +15,8 @@
         completions."
     </string>
     <string name="nav_search">Tìm</string>
-    <string name="nav_news">Sự kiện</string>
-    <string name="nav_blood">Tin tức</string>
+    <string name="nav_news">Tin Tức</string>
+    <string name="nav_blood">Sự Kiện</string>
     <string name="nav_user">Người dùng</string>
 
     <dimen name="fix_size">40dp</dimen>
@@ -25,4 +25,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_donate">Hiến máu</string>
+    <string name="channel_name">channel_name</string>
+    <string name="channel_description">channel_description</string>
 </resources>

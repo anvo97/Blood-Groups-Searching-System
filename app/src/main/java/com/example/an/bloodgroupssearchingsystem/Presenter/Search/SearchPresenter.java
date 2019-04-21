@@ -28,10 +28,6 @@ public class SearchPresenter implements LoadSearchListener {
         searchInterator.taoQuan();
     }
 
-    public void LoadListSearch(){
-        searchInterator.getDataSearch();
-    }
-
     @Override
     public void onLoadSearchSuccess(List<String> ListSearch) {
         searchView.displaySearchBlood(ListSearch);
@@ -39,10 +35,6 @@ public class SearchPresenter implements LoadSearchListener {
 
     public void onLoadSearchSuccess2(List<String> ListSearch){
         searchView.displaySearchCounty(ListSearch);
-    }
-
-    public void onLoadSearchSuccess3(List<ListSearch> ListSearch){
-        searchView.displayListSearch(ListSearch);
     }
 
     @Override

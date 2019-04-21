@@ -3,7 +3,9 @@ package com.example.an.bloodgroupssearchingsystem.View.Donate;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -42,14 +44,16 @@ import java.util.Calendar;
  */
 public class DonateFragment extends Fragment implements View.OnClickListener, DonateView {
     private PresenterLogicDonateBlood presenterLogicDonateBlood = new PresenterLogicDonateBlood(this);
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public DonateFragment() {
         // Required empty public constructor
     }
 
-    private EditText edtTen, edtSDT, edtEmail, edtNgheNghiep, edtCMND, edtDiaChi;
-    private TextView txtNgaySinh;
-    private Button btnNgaySinh, btnDangKy;
+    private EditText edtTen, edtSDT, edtEmail, edtNgheNghiep, edtCMND;
+    private TextView txtNgaySinh, txtDiaChi;
+    private Button btnNgaySinh, btnDangKy, btnDiaChi;
     private RadioGroup radioGroup;
     private RadioButton radio_Nam, radio_Nu;
     private Calendar calendar;
@@ -61,6 +65,8 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     private RelativeLayout rlSukien;
     private DatabaseReference mData;
     private String ChuongTrinh;
+    private char[] kyTuDacBiet = {'-', '*', '!', '@', '~', '`', '#', '$', '%', '^', '&', '(', ')', '_', '+', ':', '{', '[', ']', '}', ';', '<', ',', '>', '.', '?', '/'};
+    private boolean checkQuan = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,15 +78,17 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         edtEmail = (EditText) view.findViewById(R.id.editEmail);
         edtNgheNghiep = (EditText) view.findViewById(R.id.editNgheNghiep);
         edtCMND = (EditText) view.findViewById(R.id.editCMND);
-        edtDiaChi = (EditText) view.findViewById(R.id.editDiaChi);
+        txtDiaChi = (TextView) view.findViewById(R.id.txtDiaChi);
         txtNgaySinh = (TextView) view.findViewById(R.id.txt_NgaySinh);
         btnNgaySinh = (Button) view.findViewById(R.id.btn_NgaySinh);
         btnDangKy = (Button) view.findViewById(R.id.btn_dangky);
+        btnDiaChi = (Button) view.findViewById(R.id.btnDiaChi);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGioiTinh);
         radio_Nam = (RadioButton) view.findViewById(R.id.radioNam);
         radio_Nu = (RadioButton) view.findViewById(R.id.radioNu);
         rlSukien = (RelativeLayout) view.findViewById(R.id.rlSuKien);
         mData = FirebaseDatabase.getInstance().getReference();
+
 
         radio_Nam.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -140,6 +148,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         mapping();
 
         btnDangKy.setOnClickListener(this);
+        btnDiaChi.setOnClickListener(this);
         return view;
     }
 
@@ -197,17 +206,10 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                 calendar.set(year, month, dayOfMonth);
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Calendar now = Calendar.getInstance();
-                if (calendar.getTime().after(now.getTime())) {
-                    //chon qua thoi gian
-                    Log.d("VuHung", "" + true);
-                    Toast.makeText(getContext(), "Ngày sinh không hợp lệ", Toast.LENGTH_SHORT).show();
-                } else {
-                    //chon dung thoi gian
-                    Log.d("VuHung", "" + false);
-                    txtNgaySinh.setText(simpleDateFormat.format(calendar.getTime()));
-                }
+                txtNgaySinh.setText(simpleDateFormat.format(calendar.getTime()));
             }
         }, year, month, date);
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTime().getTime());
         datePickerDialog.show();
     }
 
@@ -220,7 +222,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
             final String DateOfBirth = txtNgaySinh.getText().toString();
             final String Phone = edtSDT.getText().toString();
             final String Email = edtEmail.getText().toString();
-            final String Diachi = edtDiaChi.getText().toString();
+            final String Diachi = txtDiaChi.getText().toString();
             final String NgheNghiep = edtNgheNghiep.getText().toString();
             final String CMND = edtCMND.getText().toString();
             final String Gender;
@@ -230,19 +232,92 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                 Gender = radio_Nu.getText().toString();
             }
             if (presenterLogicDonateBlood.checkInput(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND) == false) {
-
+                sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
             } else {
                 presenterLogicDonateBlood.ResolveRegisterDonateBlood(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND);
                 presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
                         QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
                 startActivity(new Intent(getContext(), PhieuDangKy.class));
+                sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
             }
         }
+        if (v == btnDiaChi) {
+            dialogAddress();
+        }
+    }
+
+    public void dialogAddress() {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.custom_edit_address);
+
+        final EditText edtStreet = (EditText) dialog.findViewById(R.id.edtStreet);
+        final EditText edtPhuong = (EditText) dialog.findViewById(R.id.edtPhuong);
+        final EditText edtCounty = (EditText) dialog.findViewById(R.id.edtCounty);
+        final EditText edtCity = (EditText) dialog.findViewById(R.id.edtCity);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btn_Cancel);
+        Button btnOK = (Button) dialog.findViewById(R.id.btn_OK);
+
+        sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
+        edtStreet.setText(sharedPreferences.getString("Street", ""));
+        edtPhuong.setText(sharedPreferences.getString("Phuong", ""));
+        edtCounty.setText(sharedPreferences.getString("County", ""));
+        edtCity.setText(sharedPreferences.getString("City", ""));
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edtStreet.getText().length() == 0 || edtPhuong.getText().length() == 0
+                        || edtCounty.getText().length() == 0 || edtCity.getText().length() == 0) {
+                    Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                } else {
+                    char a[] = edtCounty.getText().toString().toCharArray();
+                    for (int i = 0; i < a.length; i++) {
+                        for (int j = 0; j < kyTuDacBiet.length; j++) {
+                            if (a[i] == kyTuDacBiet[j]) {
+                                checkQuan = true;
+                            }
+                        }
+                    }
+                    if (checkQuan) {
+                        Toast.makeText(getContext(), "Không hợp lệ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String strStreet = edtStreet.getText().toString().toUpperCase();
+                        String strPhuong = edtPhuong.getText().toString().toUpperCase();
+                        String strCounty = edtCounty.getText().toString().toUpperCase();
+                        String strCity = edtCity.getText().toString().toUpperCase();
+                        txtDiaChi.setText(strStreet + ", " + strPhuong + ", " + strCounty + ", " + strCity);
+                        sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
+                        editor = sharedPreferences.edit();
+                        editor.putString("Street", edtStreet.getText().toString());
+                        editor.putString("Phuong", edtPhuong.getText().toString());
+                        editor.putString("County", edtCounty.getText().toString());
+                        editor.putString("City", edtCity.getText().toString());
+                        editor.commit();
+                        dialog.cancel();
+                    }
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     @Override
     public void checkInput() {
-        Toast.makeText(getContext(), "Khong duoc de trong", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
     }
 
     @Override

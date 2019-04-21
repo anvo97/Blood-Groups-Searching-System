@@ -7,5 +7,4 @@ import java.util.List;
 public interface SearchView {
     void displaySearchBlood(List<String> listSearchBlood);
     void displaySearchCounty(List<String> listSearchCounty);
-    void displayListSearch(List<ListSearch> listSearch);
 }

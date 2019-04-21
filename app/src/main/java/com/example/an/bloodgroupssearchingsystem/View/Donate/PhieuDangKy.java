@@ -1,9 +1,15 @@
 package com.example.an.bloodgroupssearchingsystem.View.Donate;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -13,6 +19,14 @@ import android.widget.Toast;
 
 import com.example.an.bloodgroupssearchingsystem.Presenter.Donate.PresenterLogicDonateBlood;
 import com.example.an.bloodgroupssearchingsystem.R;
+import com.example.an.bloodgroupssearchingsystem.View.Login.MainActivity;
+import com.example.an.bloodgroupssearchingsystem.View.Menu.MenuActivity;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PhieuDangKy extends AppCompatActivity implements DonateView, View.OnClickListener {
 
@@ -26,14 +40,18 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
             radioCo10, radioCo11, radioCo12, radioCo13, radioCo14, radioCo15, radioCo16, radioKhong1, radioKhong2,
             radioKhong3, radioKhong4, radioKhong5, radioKhong6, radioKhong7, radioKhong8, radioKhong9, radioKhong10,
             radioKhong11, radioKhong12, radioKhong13, radioKhong14, radioKhong15, radioKhong16;
-    private Button btnPhieuDangKy;
+    private Button btnPhieuDangKy, btnHuy;
     private boolean DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
             QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai;
+    private DatabaseReference mData;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phieu_dang_ky);
         anhXa();
+        dialogCungCap();
+        setID();
         start();
     }
 
@@ -88,6 +106,8 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
         radioKhong15 = (RadioButton) findViewById(R.id.radio_Khong_15);
         radioKhong16 = (RadioButton) findViewById(R.id.radio_Khong_16);
         btnPhieuDangKy = (Button) findViewById(R.id.btn_phieudangky);
+        btnHuy = (Button) findViewById(R.id.btn_Huy);
+        mData = FirebaseDatabase.getInstance().getReference();
     }
 
     public void start() {
@@ -285,14 +305,15 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
             }
         });
         btnPhieuDangKy.setOnClickListener(this);
+        btnHuy.setOnClickListener(this);
     }
 
     private void doOnGameCharacterChanged(CompoundButton buttonView, boolean isChecked) {
         RadioButton radio = (RadioButton) buttonView;
     }
 
-    public void onClick(View v){
-        if(v == btnPhieuDangKy){
+    public void onClick(View v) {
+        if (v == btnPhieuDangKy) {
             if (radioCo1.isChecked()) {
                 DaTungHienMau = true;
             } else {
@@ -373,28 +394,98 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
             } else {
                 CoThai = false;
             }
-            presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
-                    QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
+            if (MaTuy || QuanHeHIV || (CoThai && VungCoDich)) {
+                dialogDangKy();
+            } else {
+                presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
+                        QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
+            }
+        }
+        if (v == btnHuy) {
+            removeID();
+            startActivity(new Intent(this, MenuActivity.class));
+            finish();
         }
     }
 
     @Override
     public void checkInput() {
-        Toast.makeText(this, "khong duoc de trong thong tin", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void successfully() {
-        Toast.makeText(this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void unsuccessfully() {
-        Toast.makeText(this, "Dang ky that bai", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    public void dialogDangKy() {
+        new AlertDialog.Builder(PhieuDangKy.this)
+                .setTitle("Thông báo")
+                .setMessage("Bạn không đủ điều kiện để hiến máu, cảm ơn bạn đã dành thời gian quan tâm đến ứng dụng.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        removeID();
+                        startActivity(new Intent(PhieuDangKy.this, MenuActivity.class));
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+    public void dialogCungCap() {
+        new AlertDialog.Builder(PhieuDangKy.this)
+                .setTitle("Thông báo")
+                .setMessage("Mời bạn cung cấp thêm thông tin(nếu có).")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
+
+    public void setID() {
+        mData.child("InformationDonateBlood").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                edt_MaDK.setText(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void removeID() {
+        mData.child("InformationDonateBlood").child(edt_MaDK.getText().toString()).removeValue();
     }
 }

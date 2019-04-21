@@ -5,35 +5,29 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/phoneHos"
+        android:id="@+id/txtNameHos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone Hospital"
+        android:text="tên bệnh viện"
         android:textSize="18dp"
         android:textColor="#000000"
         android:paddingStart="10dp"
         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="visible"
         />
     <TextView
         android:id="@+id/phoneCus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone Customer"
+        android:text="số điện thoại"
         android:textSize="18dp"
         android:textColor="#000000"
-        android:paddingStart="10dp"
+        android:paddingStart="20dp"
+        android:layout_toEndOf="@id/txtNameHos"
         android:paddingTop="10dp"
-        />
-    <TextView
-        android:id="@+id/addressHos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Address Hospital"
-        android:textSize="18dp"
-        android:textColor="#000000"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:layout_below="@id/phoneHos"
+        android:paddingBottom="10dp"
+        android:visibility="visible"
         />
 
 </RelativeLayout>

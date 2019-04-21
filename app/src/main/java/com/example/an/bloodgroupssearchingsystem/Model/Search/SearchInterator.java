@@ -1,16 +1,28 @@
 package com.example.an.bloodgroupssearchingsystem.Model.Search;
 
+import android.support.annotation.NonNull;
+import android.widget.ListView;
+
+import com.example.an.bloodgroupssearchingsystem.View.Donate.Event;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class SearchInterator {
 
     private LoadSearchListener LoadSearchListener;
+    private DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
 
-    public SearchInterator(LoadSearchListener  LoadSearchListener) {
-        this.LoadSearchListener=LoadSearchListener;
+
+    public SearchInterator(LoadSearchListener LoadSearchListener) {
+        this.LoadSearchListener = LoadSearchListener;
     }
 
-    public  void taodulieu(){
+    public void taodulieu() {
 
         ArrayList<String> arrayList = new ArrayList<String>();
         arrayList.add(new String("O"));
@@ -21,29 +33,20 @@ public class SearchInterator {
         LoadSearchListener.onLoadSearchSuccess(arrayList);
     }
 
-    public void taoQuan(){
+    public void taoQuan() {
 
         ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add(new String("Hải Châu"));
-        arrayList.add(new String("Cẩm Lệ"));
-        arrayList.add(new String("Thanh Khê"));
-        arrayList.add(new String("Liên Chiểu"));
-        arrayList.add(new String("Ngũ Hành Sơn"));
-        arrayList.add(new String("Sơn Trà"));
-        arrayList.add(new String("Hòa Vang"));
-        arrayList.add(new String("Hoàng Sa"));
+        arrayList.add(new String(" HẢI CHÂU"));
+        arrayList.add(new String(" CẨM LỆ"));
+        arrayList.add(new String(" THANH KHÊ"));
+        arrayList.add(new String(" LIÊN CHIỂU"));
+        arrayList.add(new String(" NGŨ HÀNH SƠN"));
+        arrayList.add(new String(" SƠN TRÀ"));
+        arrayList.add(new String(" HÒA VANG"));
+        arrayList.add(new String(" HOÀNG SA"));
 
 
         LoadSearchListener.onLoadSearchSuccess2(arrayList);
-    }
-
-    public void getDataSearch(){
-        ArrayList<ListSearch> arrayList = new ArrayList<ListSearch>();
-
-        arrayList.add(new ListSearch("08988741427","benh vien gia dinh",""));
-        arrayList.add(new ListSearch("08988723557","benh vien hoan my",""));
-
-        LoadSearchListener.onLoadSearchSuccess3(arrayList);
     }
 
 }

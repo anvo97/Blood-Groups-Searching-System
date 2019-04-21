@@ -41,7 +41,7 @@ public class ListSearchAdapter extends BaseAdapter {
     }
 
     public class ViewHolder{
-        TextView txtPhoneHospital, txtAddressHospital, txtPhoneCustomer;
+        TextView txtPhone, txtNameHospital;
     }
 
     @Override
@@ -54,9 +54,8 @@ public class ListSearchAdapter extends BaseAdapter {
             convertView = inflater.inflate(mLayOut,null);
             viewHolder = new ViewHolder();
 
-            viewHolder.txtPhoneHospital = (TextView)convertView.findViewById(R.id.phoneHos);
-            viewHolder.txtAddressHospital = (TextView)convertView.findViewById(R.id.addressHos);
-            viewHolder.txtPhoneCustomer = (TextView)convertView.findViewById(R.id.phoneCus);
+            viewHolder.txtPhone = (TextView)convertView.findViewById(R.id.phoneCus);
+            viewHolder.txtNameHospital = (TextView)convertView.findViewById(R.id.txtNameHos);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)convertView.getTag();
@@ -64,9 +63,8 @@ public class ListSearchAdapter extends BaseAdapter {
 
         ListSearch listSearch = arrayListSearch.get(position);
 
-        viewHolder.txtPhoneHospital.setText(listSearch.getPhoneHospital());
-        viewHolder.txtAddressHospital.setText(listSearch.getAddressHospital());
-        viewHolder.txtPhoneCustomer.setText(listSearch.getPhoneCustomer());
+        viewHolder.txtPhone.setText(listSearch.getPhone());
+        viewHolder.txtNameHospital.setText(listSearch.getName());
 
         return convertView;
     }

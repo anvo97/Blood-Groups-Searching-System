@@ -1,37 +1,31 @@
 package com.example.an.bloodgroupssearchingsystem.Model.Search;
 
 public class ListSearch {
-    private String phoneHospital;
-    private String addressHospital;
-    private String phoneCustomer;
+    private String Name;
+    private String Phone;
 
-    public ListSearch(String phoneHospital, String addressHospital, String phoneCustomer) {
-        this.phoneHospital = phoneHospital;
-        this.addressHospital = addressHospital;
-        this.phoneCustomer = phoneCustomer;
+    public ListSearch(){
+
     }
 
-    public String getPhoneHospital() {
-        return phoneHospital;
+    public ListSearch(String name, String phone) {
+        Name = name;
+        Phone = phone;
     }
 
-    public void setPhoneHospital(String phoneHospital) {
-        this.phoneHospital = phoneHospital;
+    public String getName() {
+        return Name;
     }
 
-    public String getAddressHospital() {
-        return addressHospital;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public void setAddressHospital(String addressHospital) {
-        this.addressHospital = addressHospital;
+    public String getPhone() {
+        return Phone;
     }
 
-    public String getPhoneCustomer() {
-        return phoneCustomer;
-    }
-
-    public void setPhoneCustomer(String phoneCustomer) {
-        this.phoneCustomer = phoneCustomer;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 }

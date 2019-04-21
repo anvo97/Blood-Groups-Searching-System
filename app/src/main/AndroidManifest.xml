@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".Service.EvensService"/>
         <activity android:name=".View.UpdateInformation.MyProfileActivity"></activity>
         <activity android:name=".View.News.DetailActivity" />
         <activity android:name=".View.Login.MainActivity">

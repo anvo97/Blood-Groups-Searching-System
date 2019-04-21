@@ -34,7 +34,7 @@ public class ModelNews {
                     listNews.add(news);
                 }
                 Log.d("AAA",listNews.get(0).getTitle());
-                loadNewsLister.onLoadNewsSuccess(listNews);
+                loadNewsLister.onLoadNewsSuccess(listNews); //day nek cho lay du lieu ra
             }
 
             @Override

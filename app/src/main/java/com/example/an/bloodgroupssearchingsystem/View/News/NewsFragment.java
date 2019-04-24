@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Model.News.Detail;
 import com.example.an.bloodgroupssearchingsystem.Model.News.News;
 import com.example.an.bloodgroupssearchingsystem.Presenter.News.PresenterLogicNews;
@@ -32,6 +33,7 @@ public class NewsFragment extends Fragment implements ViewNews {
 
     PresenterLogicNews presenterLogicNews=new PresenterLogicNews(this);
     RecyclerView recyclerView;
+    private SVProgressHUD mSvProgressHUD;
 
     private String id;
     private String TitleNews;
@@ -51,6 +53,8 @@ public class NewsFragment extends Fragment implements ViewNews {
         kenBurnsView=(KenBurnsView)view.findViewById(R.id.top_image);
         diagonalView=(DiagonalView)view.findViewById(R.id.diagonallayout);
         top_title=(TextView)view.findViewById(R.id.txtTopTitle);
+        mSvProgressHUD=new SVProgressHUD(getContext());
+        mSvProgressHUD.show();
 
         diagonalView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,5 +78,6 @@ public class NewsFragment extends Fragment implements ViewNews {
                 Time=listnNews.get(0).getTime();
                 Picasso.get().load(listnNews.get(0).getImage()).into(kenBurnsView);
                 presenterLogicNews.InnitView(recyclerView,listnNews);
+                mSvProgressHUD.dismiss();
     }
 }

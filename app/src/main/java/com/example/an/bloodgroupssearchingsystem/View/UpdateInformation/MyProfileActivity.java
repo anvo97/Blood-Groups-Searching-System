@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Model.Register.Customer;
 import com.example.an.bloodgroupssearchingsystem.Presenter.UpdateInformation.PresenterLogicUpdate;
 import com.example.an.bloodgroupssearchingsystem.R;
@@ -31,11 +32,13 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     private FrameLayout btnUpdate;
     int PICK_IMAGE=1;
     private PresenterLogicUpdate presenterLogicUpdate;
+    private SVProgressHUD mSvProgressHUD;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
         AnhXa();
+        mSvProgressHUD=new SVProgressHUD(this);
         presenterLogicUpdate=new PresenterLogicUpdate(this);
         imgAvatar.setOnClickListener(this);
         edtBirthday.setOnClickListener(this);
@@ -95,6 +98,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         }
         if (v==btnUpdate){
             presenterLogicUpdate.ResovleUpdate(edtAddress,imgAvatar,edtFullname,edtBirthday,edtGender,edtPhoneNumber) ;
+            mSvProgressHUD.show();
         }
     }
 
@@ -108,6 +112,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void UpdateSuccess() {
+        mSvProgressHUD.dismiss();
         Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
     }
 

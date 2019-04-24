@@ -27,6 +27,8 @@ public class ModelBlood {
                 for (DataSnapshot chile:nodeChild){
                     Events events=chile.getValue(Events.class);
                     events.setContent(chile.child("Detail").child("content").getValue().toString());
+                    events.setPlace(chile.child("Detail").child("place").getValue().toString());
+                    events.setTime(chile.child("Detail").child("Time").getValue().toString());
                     events.setId(chile.getKey());
                     arrayEventList.add(events);
                 }

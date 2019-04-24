@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/notification/ic_airline_seat_flat_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_add_location_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="fdfffd" />
-                            <entry key="outputName" value="ic_airline_seat_flat_while_24dp" />
+                            <entry key="color" value="ffd756" />
+                            <entry key="outputName" value="ic_add_location_orange_24dp" />
                             <entry key="sourceFile" value="C:\Users\PC" />
                           </map>
                         </option>

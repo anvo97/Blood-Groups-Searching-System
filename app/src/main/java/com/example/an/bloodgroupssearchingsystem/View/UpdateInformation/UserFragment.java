@@ -134,6 +134,8 @@ public class UserFragment extends Fragment implements ViewUpdate {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
                                     Toast.makeText(getContext(), "cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(getContext(),LoginActivity.class);
+                                    startActivity(intent);
 
                                 }else {
                                     Toast.makeText(getContext(), "cập nhật thất bại", Toast.LENGTH_SHORT).show();

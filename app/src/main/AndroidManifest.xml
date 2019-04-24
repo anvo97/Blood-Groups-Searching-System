@@ -14,29 +14,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".Service.EvensService"/>
-        <activity android:name=".View.UpdateInformation.MyProfileActivity"></activity>
+        <activity android:name=".View.Blood.DetailEventActivity"></activity>
+
+        <service android:name=".Service.EvensService" />
+
+        <activity android:name=".View.UpdateInformation.MyProfileActivity" />
         <activity android:name=".View.News.DetailActivity" />
-        <activity android:name=".View.Login.MainActivity">
-
-        </activity>
-        <activity android:name=".View.Login.LoginActivity" >
-
-        </activity>
+        <activity android:name=".View.Login.MainActivity"></activity>
+        <activity android:name=".View.Login.LoginActivity"></activity>
         <activity android:name=".View.Register.RegisterActivity" />
-        <activity android:name=".View.Menu.MenuActivity"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".View.Menu.MenuActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".View.Donate.PhieuDangKy"
-            android:screenOrientation="landscape"
-            ></activity>
+        <activity
+            android:name=".View.Donate.PhieuDangKy"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

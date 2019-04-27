@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -44,10 +46,12 @@ public class SearchFragment extends Fragment implements SearchView {
     private SearchPresenter mainPresenter;
     private ListView listViewSearch;
     private Button btSearch;
-    private TextView txtResult;
+    private TextView txtResult, txtKetQua;
+    private EditText edtKhac;
     private DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     private ArrayList<ListSearch> arrayListSearch;
     private ListSearchAdapter adapter;
+    private RelativeLayout rlKhac;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -65,11 +69,16 @@ public class SearchFragment extends Fragment implements SearchView {
         listViewSearch = (ListView) view.findViewById(R.id.lvSearch);
         btSearch = (Button) view.findViewById(R.id.btn_search);
         txtResult = (TextView) view.findViewById(R.id.txt_Result);
+        txtKetQua = (TextView) view.findViewById(R.id.txt_KetQua);
+        edtKhac = (EditText) view.findViewById(R.id.edt_Khac);
+        rlKhac = (RelativeLayout) view.findViewById(R.id.rlKhac);
 
         mainPresenter = new SearchPresenter(this);
 
         mainPresenter.LoadSearchBlood();
         mainPresenter.LoadSearchCounty();
+
+
 
         spinnerSearchCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             private boolean selectionControl = true;
@@ -80,6 +89,29 @@ public class SearchFragment extends Fragment implements SearchView {
                     selectionControl = false;
                 } else {
                     spinnerSearchCounty.setSelection(position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerSearchBlood.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            private boolean selectionControl = true;
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (selectionControl) {
+                    selectionControl = false;
+                } else {
+                    if(spinnerSearchBlood.getSelectedItem().equals("Khác")){
+                        rlKhac.setVisibility(View.VISIBLE);
+                    }else {
+                        rlKhac.setVisibility(View.GONE);
+                        spinnerSearchBlood.setSelection(position);
+                    }
                 }
             }
 
@@ -122,7 +154,6 @@ public class SearchFragment extends Fragment implements SearchView {
 
     public void getSearch() {
         arrayListSearch = new ArrayList<ListSearch>();
-        final boolean checkAddress = false;
         mData.child("BloodStorageHospital").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -132,14 +163,20 @@ public class SearchFragment extends Fragment implements SearchView {
                     ListSearch listSearch = child.getValue(ListSearch.class);
                     String arr[] = search.Address.split(",");
                     for (int i = 0; i < arr.length; i++) {
-                        if (spinnerSearchBlood.getSelectedItem().toString().equals(search.GroupBlood)
-                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])) {
+                        if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
+                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
+                                && search.Amount > 0) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
                     }
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
                 listViewSearch.setAdapter(adapter);
+                if(arrayListSearch.isEmpty()){
+                    txtKetQua.setVisibility(View.VISIBLE);
+                }else{
+                    txtKetQua.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -156,7 +193,7 @@ public class SearchFragment extends Fragment implements SearchView {
                     ListSearch listSearch = child.getValue(ListSearch.class);
                     String arr[] = search.Address.split(",");
                     for (int i = 0; i < arr.length; i++) {
-                        if (spinnerSearchBlood.getSelectedItem().toString().equals(search.GroupBlood)
+                        if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
                                 && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
@@ -164,6 +201,11 @@ public class SearchFragment extends Fragment implements SearchView {
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
                 listViewSearch.setAdapter(adapter);
+                if(arrayListSearch.isEmpty()){
+                    txtKetQua.setVisibility(View.VISIBLE);
+                }else{
+                    txtKetQua.setVisibility(View.GONE);
+                }
             }
 
             @Override

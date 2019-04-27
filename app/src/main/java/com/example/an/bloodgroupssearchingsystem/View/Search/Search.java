@@ -1,8 +1,9 @@
 package com.example.an.bloodgroupssearchingsystem.View.Search;
 
 public class Search {
-    public String GroupBlood;
+    public String BloodGroup;
     public String Address;
+    public int Amount;
 
     public Search(){
 

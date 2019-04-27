@@ -52,7 +52,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     }
 
     private EditText edtTen, edtSDT, edtEmail, edtNgheNghiep, edtCMND;
-    private TextView txtNgaySinh, txtDiaChi;
+    private TextView txtNgaySinh, txtDiaChi, txtDiaChi2;
     private Button btnNgaySinh, btnDangKy, btnDiaChi;
     private RadioGroup radioGroup;
     private RadioButton radio_Nam, radio_Nu;
@@ -79,6 +79,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         edtNgheNghiep = (EditText) view.findViewById(R.id.editNgheNghiep);
         edtCMND = (EditText) view.findViewById(R.id.editCMND);
         txtDiaChi = (TextView) view.findViewById(R.id.txtDiaChi);
+        txtDiaChi2 = (TextView) view.findViewById(R.id.txtDiaChi2);
         txtNgaySinh = (TextView) view.findViewById(R.id.txt_NgaySinh);
         btnNgaySinh = (Button) view.findViewById(R.id.btn_NgaySinh);
         btnDangKy = (Button) view.findViewById(R.id.btn_dangky);
@@ -159,7 +160,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinnerList.getSelectedItem().toString().equals("Bệnh viện")) {
                     ChuongTrinh = (String) parent.getItemAtPosition(position);
-                    rlSukien.setVisibility(View.INVISIBLE);
+                    rlSukien.setVisibility(View.GONE);
                     spinnerList.setSelection(position);
                 } else if (spinnerList.getSelectedItem().toString().equals("Sự kiện")) {
                     rlSukien.setVisibility(View.VISIBLE);
@@ -179,7 +180,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                     });
                 } else {
                     ChuongTrinh = (String) parent.getItemAtPosition(position);
-                    rlSukien.setVisibility(View.INVISIBLE);
+                    rlSukien.setVisibility(View.GONE);
                     spinnerList.setSelection(position);
                 }
             }
@@ -299,6 +300,9 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                         String strCounty = edtCounty.getText().toString().toUpperCase();
                         String strCity = edtCity.getText().toString().toUpperCase();
                         txtDiaChi.setText(strStreet + ", " + strPhuong + ", " + strCounty + ", " + strCity);
+                        String catChuoi = edtStreet.getText().toString() + ", " + edtPhuong.getText().toString()
+                                + ", " + edtCounty.getText().toString() + ", " + edtCity.getText().toString();
+                        txtDiaChi2.setText(catChuoi.substring(0, 25)+"...");
                         sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
                         editor = sharedPreferences.edit();
                         editor.putString("Street", edtStreet.getText().toString());
@@ -328,6 +332,15 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     @Override
     public void unsuccessfully() {
 
+    }
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        rlSukien.setVisibility(View.GONE);
+        spinnerList.setSelection(0);
     }
 }
 

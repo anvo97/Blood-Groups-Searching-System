@@ -104,7 +104,6 @@ public class MenuActivity extends AppCompatActivity {
                     default:
                         return false;
                 }
-
             }
         });
 

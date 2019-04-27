@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Presenter.Donate.PresenterLogicDonateBlood;
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.Login.MainActivity;
@@ -44,6 +45,8 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
     private boolean DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
             QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai;
     private DatabaseReference mData;
+    private SVProgressHUD mSvProgressHUD;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
         setContentView(R.layout.phieu_dang_ky);
         anhXa();
         dialogCungCap();
+        mSvProgressHUD.dismiss();
         setID();
         start();
     }
@@ -108,6 +112,8 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
         btnPhieuDangKy = (Button) findViewById(R.id.btn_phieudangky);
         btnHuy = (Button) findViewById(R.id.btn_Huy);
         mData = FirebaseDatabase.getInstance().getReference();
+        mSvProgressHUD = new SVProgressHUD(this);
+        mSvProgressHUD.show();
     }
 
     public void start() {
@@ -314,6 +320,7 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
 
     public void onClick(View v) {
         if (v == btnPhieuDangKy) {
+            mSvProgressHUD.show();
             if (radioCo1.isChecked()) {
                 DaTungHienMau = true;
             } else {
@@ -395,13 +402,16 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
                 CoThai = false;
             }
             if (MaTuy || QuanHeHIV || (CoThai && VungCoDich)) {
-                dialogDangKy();
+                dialogKhongDuDieuKien();
             } else {
                 presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
                         QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
+                dialogKetQua();
+                mSvProgressHUD.dismiss();
             }
         }
         if (v == btnHuy) {
+            mSvProgressHUD.show();
             removeID();
             startActivity(new Intent(this, MenuActivity.class));
             finish();
@@ -428,7 +438,7 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
 
     }
 
-    public void dialogDangKy() {
+    public void dialogKhongDuDieuKien() {
         new AlertDialog.Builder(PhieuDangKy.this)
                 .setTitle("Thông báo")
                 .setMessage("Bạn không đủ điều kiện để hiến máu, cảm ơn bạn đã dành thời gian quan tâm đến ứng dụng.")
@@ -451,6 +461,22 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                })
+                .show();
+    }
+
+    public void dialogKetQua() {
+        new AlertDialog.Builder(PhieuDangKy.this)
+                .setTitle("Đăng ký thành công")
+                .setMessage("Cảm ơn bạn đã đăng ký. Vui lòng chờ phản hồi của chúng tôi qua gmail.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSvProgressHUD.show();
+                        startActivity(new Intent(PhieuDangKy.this, MenuActivity.class));
+                        mSvProgressHUD.dismiss();
+                        finish();
                     }
                 })
                 .show();

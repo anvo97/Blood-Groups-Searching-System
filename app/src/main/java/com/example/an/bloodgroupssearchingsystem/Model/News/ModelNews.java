@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ModelNews {
     private LoadNewsLister loadNewsLister;
@@ -34,6 +35,7 @@ public class ModelNews {
                     listNews.add(news);
                 }
                 Log.d("AAA",listNews.get(0).getTitle());
+                Collections.reverse(listNews);
                 loadNewsLister.onLoadNewsSuccess(listNews); //day nek cho lay du lieu ra
             }
 

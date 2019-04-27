@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ModelBlood {
     private LoadEvensLister loadEvensLister;
@@ -32,6 +33,7 @@ public class ModelBlood {
                     events.setId(chile.getKey());
                     arrayEventList.add(events);
                 }
+                Collections.reverse(arrayEventList);
                 loadEvensLister.onLoadEventsSuccess(arrayEventList);
             }
 

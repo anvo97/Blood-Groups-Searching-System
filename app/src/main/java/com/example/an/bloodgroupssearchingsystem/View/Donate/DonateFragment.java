@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Presenter.Donate.PresenterLogicDonateBlood;
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.UpdateInformation.MyProfileActivity;
@@ -67,6 +68,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     private String ChuongTrinh;
     private char[] kyTuDacBiet = {'-', '*', '!', '@', '~', '`', '#', '$', '%', '^', '&', '(', ')', '_', '+', ':', '{', '[', ']', '}', ';', '<', ',', '>', '.', '?', '/'};
     private boolean checkQuan = false;
+    private SVProgressHUD mSvProgressHUD;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +91,8 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         radio_Nu = (RadioButton) view.findViewById(R.id.radioNu);
         rlSukien = (RelativeLayout) view.findViewById(R.id.rlSuKien);
         mData = FirebaseDatabase.getInstance().getReference();
-
+        mSvProgressHUD = new SVProgressHUD(getContext());
+        mSvProgressHUD.show();
 
         radio_Nam.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -134,7 +137,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                 Iterable<DataSnapshot> nodeChild = dataSnapshot.getChildren();
                 for (DataSnapshot child : nodeChild) {
                     Event event = child.getValue(Event.class);
-                    arraySpinnerSuKien.add(event.Name);
+                    arraySpinnerSuKien.add(event.Title);
                 }
                 arrayAdapterSuKien = new ArrayAdapter<>(getContext(), R.layout.spinner_textview, arraySpinnerSuKien);
                 arrayAdapterSuKien.setDropDownViewResource(R.layout.spinner_textview);
@@ -150,6 +153,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
 
         btnDangKy.setOnClickListener(this);
         btnDiaChi.setOnClickListener(this);
+        mSvProgressHUD.dismiss();
         return view;
     }
 
@@ -219,6 +223,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     public void onClick(View v) {
 
         if (v == btnDangKy) {
+            mSvProgressHUD.show();
             final String Name = edtTen.getText().toString();
             final String DateOfBirth = txtNgaySinh.getText().toString();
             final String Phone = edtSDT.getText().toString();
@@ -233,10 +238,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                 Gender = radio_Nu.getText().toString();
             }
             if (presenterLogicDonateBlood.checkInput(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND) == false) {
-                sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.commit();
+                mSvProgressHUD.dismiss();
             } else {
                 presenterLogicDonateBlood.ResolveRegisterDonateBlood(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND);
                 presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
@@ -246,6 +248,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                 editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
+                getActivity().finish();
             }
         }
         if (v == btnDiaChi) {
@@ -302,7 +305,11 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                         txtDiaChi.setText(strStreet + ", " + strPhuong + ", " + strCounty + ", " + strCity);
                         String catChuoi = edtStreet.getText().toString() + ", " + edtPhuong.getText().toString()
                                 + ", " + edtCounty.getText().toString() + ", " + edtCity.getText().toString();
-                        txtDiaChi2.setText(catChuoi.substring(0, 25)+"...");
+                        if (catChuoi.length() > 25) {
+                            txtDiaChi2.setText(catChuoi.substring(0, 25) + "...");
+                        } else {
+                            txtDiaChi2.setText(catChuoi);
+                        }
                         sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
                         editor = sharedPreferences.edit();
                         editor.putString("Street", edtStreet.getText().toString());
@@ -333,7 +340,6 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
     public void unsuccessfully() {
 
     }
-
 
 
     @Override

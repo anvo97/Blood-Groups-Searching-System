@@ -18,7 +18,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Model.Search.ListSearch;
 import com.example.an.bloodgroupssearchingsystem.Presenter.Search.ListSearchAdapter;
 import com.example.an.bloodgroupssearchingsystem.Presenter.Search.SearchPresenter;
@@ -52,6 +54,7 @@ public class SearchFragment extends Fragment implements SearchView {
     private ArrayList<ListSearch> arrayListSearch;
     private ListSearchAdapter adapter;
     private RelativeLayout rlKhac;
+    private SVProgressHUD mSvProgressHUD;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -72,12 +75,12 @@ public class SearchFragment extends Fragment implements SearchView {
         txtKetQua = (TextView) view.findViewById(R.id.txt_KetQua);
         edtKhac = (EditText) view.findViewById(R.id.edt_Khac);
         rlKhac = (RelativeLayout) view.findViewById(R.id.rlKhac);
-
+        mSvProgressHUD = new SVProgressHUD(getContext());
+        mSvProgressHUD.show();
         mainPresenter = new SearchPresenter(this);
 
         mainPresenter.LoadSearchBlood();
         mainPresenter.LoadSearchCounty();
-
 
 
         spinnerSearchCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -106,9 +109,9 @@ public class SearchFragment extends Fragment implements SearchView {
                 if (selectionControl) {
                     selectionControl = false;
                 } else {
-                    if(spinnerSearchBlood.getSelectedItem().equals("Khác")){
+                    if (spinnerSearchBlood.getSelectedItem().equals("Khác")) {
                         rlKhac.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         rlKhac.setVisibility(View.GONE);
                         spinnerSearchBlood.setSelection(position);
                     }
@@ -124,13 +127,21 @@ public class SearchFragment extends Fragment implements SearchView {
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mSvProgressHUD.show();
                 btSearch.setEnabled(false);
                 listViewSearch.setAdapter(null);
-                getSearch();
+                if(edtKhac.length() == 0){
+                    Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                    mSvProgressHUD.dismiss();
+                    btSearch.setEnabled(true);
+                }else {
+                    getSearch();
+                }
                 txtResult.setVisibility(View.VISIBLE);
                 listViewSearch.setVisibility(View.VISIBLE);
             }
         });
+        mSvProgressHUD.dismiss();
 
         // Inflate the layout for this fragment
         return view;
@@ -165,6 +176,9 @@ public class SearchFragment extends Fragment implements SearchView {
                     for (int i = 0; i < arr.length; i++) {
                         if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
                                 && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
+                                && search.Amount > 0
+                                || edtKhac.getText().toString().toUpperCase().equals(search.BloodGroup)
+                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
                                 && search.Amount > 0) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
@@ -172,10 +186,10 @@ public class SearchFragment extends Fragment implements SearchView {
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
                 listViewSearch.setAdapter(adapter);
-                if(arrayListSearch.isEmpty()){
+                if (arrayListSearch.isEmpty()) {
                     txtKetQua.setVisibility(View.VISIBLE);
-                }else{
-                    txtKetQua.setVisibility(View.GONE);
+                } else {
+                    txtKetQua.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -194,6 +208,8 @@ public class SearchFragment extends Fragment implements SearchView {
                     String arr[] = search.Address.split(",");
                     for (int i = 0; i < arr.length; i++) {
                         if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
+                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
+                                || edtKhac.getText().toString().toUpperCase().equals(search.BloodGroup)
                                 && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
@@ -201,11 +217,12 @@ public class SearchFragment extends Fragment implements SearchView {
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
                 listViewSearch.setAdapter(adapter);
-                if(arrayListSearch.isEmpty()){
+                if (arrayListSearch.isEmpty()) {
                     txtKetQua.setVisibility(View.VISIBLE);
-                }else{
-                    txtKetQua.setVisibility(View.GONE);
+                } else {
+                    txtKetQua.setVisibility(View.INVISIBLE);
                 }
+                mSvProgressHUD.dismiss();
             }
 
             @Override

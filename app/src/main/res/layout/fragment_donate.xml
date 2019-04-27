@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="THÔNG TIN NGƯỜI HIẾN MÁU"
+            android:text="ĐĂNG KÝ HIẾN MÁU"
             android:textColor="@color/backgroud_end"
             android:textSize="22dp"
             android:textStyle="bold" />

@@ -29,6 +29,7 @@ public class SearchInterator {
         arrayList.add(new String("A"));
         arrayList.add(new String("B"));
         arrayList.add(new String("AB"));
+        arrayList.add(new String("Khác"));
 
         LoadSearchListener.onLoadSearchSuccess(arrayList);
     }

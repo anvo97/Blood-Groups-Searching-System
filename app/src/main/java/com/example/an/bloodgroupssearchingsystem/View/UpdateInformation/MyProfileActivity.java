@@ -97,15 +97,15 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             PickBirthday();
         }
         if (v==btnUpdate){
-            presenterLogicUpdate.ResovleUpdate(edtAddress,imgAvatar,edtFullname,edtBirthday,edtGender,edtPhoneNumber) ;
             mSvProgressHUD.show();
+            presenterLogicUpdate.ResovleUpdate(edtAddress,imgAvatar,edtFullname,edtBirthday,edtGender,edtPhoneNumber) ;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==PICK_IMAGE){
+        if(requestCode==PICK_IMAGE && resultCode==RESULT_OK && data!=null){
             imgAvatar.setImageURI(data.getData());
         }
     }
@@ -118,12 +118,14 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void UpdateUnsuccess() {
+        mSvProgressHUD.dismiss();
         Toast.makeText(this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void CheckInput(Boolean CheckInput) {
-
+        mSvProgressHUD.dismiss();
+        Toast.makeText(this, "Vui lòng kiểm tra lại thông tin", Toast.LENGTH_SHORT).show();
     }
 
     @Override

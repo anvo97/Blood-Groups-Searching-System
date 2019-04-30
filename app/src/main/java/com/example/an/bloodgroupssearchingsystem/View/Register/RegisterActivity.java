@@ -83,6 +83,12 @@ public class RegisterActivity extends AppCompatActivity implements ViewRegister,
     }
 
     @Override
+    public void Error(Boolean CheckInput) {
+        checkinput=CheckInput;
+        Toast.makeText(this, "Vui lòng kiểm tra lại thông tin", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void RegisterUnsuccess() {
         ResetButton();
         Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();

@@ -78,8 +78,6 @@ public class UserFragment extends Fragment implements ViewUpdate {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent=new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
             }
         });
         presenterLogicUpdate.LoadDataCustomer();

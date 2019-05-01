@@ -30,12 +30,13 @@
     <ScrollView
         android:id="@+id/scvDK"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/txt_Note"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="5dp"
+        android:layout_above="@id/rlButton"
         >
 
     <RelativeLayout
@@ -923,10 +924,12 @@
     </ScrollView>
 
     <RelativeLayout
+        android:id="@+id/rlButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scvDK"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         >
 
         <Button

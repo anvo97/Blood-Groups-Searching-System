@@ -39,6 +39,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -137,7 +139,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                 Iterable<DataSnapshot> nodeChild = dataSnapshot.getChildren();
                 for (DataSnapshot child : nodeChild) {
                     Event event = child.getValue(Event.class);
-                    arraySpinnerSuKien.add(event.Title);
+                    arraySpinnerSuKien.add(event.Name);
                 }
                 arrayAdapterSuKien = new ArrayAdapter<>(getContext(), R.layout.spinner_textview, arraySpinnerSuKien);
                 arrayAdapterSuKien.setDropDownViewResource(R.layout.spinner_textview);
@@ -240,16 +242,43 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
             if (presenterLogicDonateBlood.checkInput(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND) == false) {
                 mSvProgressHUD.dismiss();
             } else {
-                presenterLogicDonateBlood.ResolveRegisterDonateBlood(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND);
-                presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
-                        QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
-                startActivity(new Intent(getContext(), PhieuDangKy.class));
-                sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.commit();
-                getActivity().finish();
+                if (checkName(Name) == 1) {
+                    if (checkPhone(Phone) == 1) {
+                        if (checkEmail(Email) == 1) {
+                            if (checkName(NgheNghiep) == 1) {
+                                if (checkCMND(CMND) == 1) {
+                                    presenterLogicDonateBlood.ResolveRegisterDonateBlood(ChuongTrinh, Name, Gender, DateOfBirth, Phone, Email, Diachi, NgheNghiep, CMND);
+                                    presenterLogicDonateBlood.ResolveRegisterDonateBlood2(DaTungHienMau, BenhManTinh, SutCan, NoiHach, ChuaRang, XamMinh, DuocChuyenMau, MaTuy,
+                                            QuanHeHIV, TiemVacXin, VungCoDich, BiCum, DungThuocKhangSinh, KhamBacSy, ChatDocDaCam, CoThai);
+                                    startActivity(new Intent(getContext(), PhieuDangKy.class));
+                                    sharedPreferences = getContext().getSharedPreferences("ADDRESS", getContext().MODE_PRIVATE);
+                                    editor = sharedPreferences.edit();
+                                    editor.clear();
+                                    editor.commit();
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getContext(), "Số CMND không hợp lệ", Toast.LENGTH_SHORT).show();
+                                    mSvProgressHUD.dismiss();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "Nghề nghiệp không hợp lệ", Toast.LENGTH_SHORT).show();
+                                mSvProgressHUD.dismiss();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                            mSvProgressHUD.dismiss();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                        mSvProgressHUD.dismiss();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Họ và tên không hợp lệ", Toast.LENGTH_SHORT).show();
+                    mSvProgressHUD.dismiss();
+                }
             }
+
+
         }
         if (v == btnDiaChi) {
             dialogAddress();
@@ -347,6 +376,60 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         super.onPause();
         rlSukien.setVisibility(View.GONE);
         spinnerList.setSelection(0);
+    }
+
+    public int checkPhone(String phone) {
+        int count = 0;
+        for (int i = 0; i < phone.length(); i++) {
+            if (Character.isWhitespace(phone.charAt(i))) {
+                count++;
+            }
+        }
+        if (phone.length() < 10 || phone.length() > 10 || count > 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public int checkCMND(String phone) {
+        int count = 0;
+        for (int i = 0; i < phone.length(); i++) {
+            if (Character.isWhitespace(phone.charAt(i))) {
+                count++;
+            }
+        }
+        if (phone.length() < 9 || phone.length() > 9 || count > 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public int checkName(String name) {
+        int count = 0;
+        for (int i = 0; i < name.length(); i++) {
+            if (!Character.isAlphabetic(name.charAt(i)) && !Character.isWhitespace(name.charAt(i))) {
+                count++;
+            }
+        }
+        if (count > 0) return 0;
+        else return 1;
+    }
+
+    public int checkEmail(String email) {
+        int count = 0;
+        if (email.length() < 16 || email.length() > 40) {
+            count++;
+        }
+        String emailPattern = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern regex = Pattern.compile(emailPattern);
+        Matcher matcher = regex.matcher(email);
+        if (matcher.find() && count == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
 

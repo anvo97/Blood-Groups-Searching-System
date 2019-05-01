@@ -13,22 +13,25 @@ import com.example.an.bloodgroupssearchingsystem.View.Donate.DonateFragment;
 
 public class DetailEventActivity extends AppCompatActivity implements View.OnClickListener {
     private Button button_register_event;
-    private TextView text_Title_name_event, text_Time_Event, text_place_Event, text_content_event;
-    private String mTitle,mPlace,mTime,mContent;
+    private TextView text_Title_name_event, text_Time_Event, text_place_Event, text_content_event, text_name_events;
+    private String mTitle, mPlace, mTime, mContent, mName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_event);
         innitView();
-        Intent i=getIntent();
-        mTitle=i.getStringExtra("title");
-        mPlace=i.getStringExtra("place");
-        mContent=i.getStringExtra("content");
-        mTime=i.getStringExtra("time");
+        Intent i = getIntent();
+        mTitle = i.getStringExtra("title");
+        mPlace = i.getStringExtra("place");
+        mContent = i.getStringExtra("content");
+        mTime = i.getStringExtra("time");
+        mName = i.getStringExtra("name");
         text_Title_name_event.setText(mTitle);
         text_content_event.setText(mContent);
         text_place_Event.setText(mPlace);
         text_Time_Event.setText(mTime);
+        text_name_events.setText(mName);
         button_register_event.setOnClickListener(this);
     }
 
@@ -38,11 +41,12 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
         text_Time_Event = findViewById(R.id.text_Time_Event);
         text_place_Event = findViewById(R.id.text_place_Event);
         text_content_event = findViewById(R.id.text_content_event);
+        text_name_events = findViewById(R.id.text_name_events);
     }
 
     @Override
     public void onClick(View v) {
-        if (v==button_register_event){
+        if (v == button_register_event) {
 
         }
     }

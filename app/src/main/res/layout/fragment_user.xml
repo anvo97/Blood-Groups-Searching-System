@@ -67,7 +67,7 @@
                     android:layout_marginRight="5dp"
                     android:background="@drawable/custom_button_user">
                 <TextView
-                    android:text="My Profile"
+                    android:text="Thông tin của tôi"
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:textSize="23dp"
@@ -85,7 +85,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/custom_button_user">
                 <TextView
-                    android:text="Information Blood"
+                    android:text="Thông tin máu"
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:textSize="23dp"
@@ -103,7 +103,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/custom_button_user">
                 <TextView
-                    android:text="Change Password"
+                    android:text="Thay đổi mật khẩu"
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:textSize="23dp"

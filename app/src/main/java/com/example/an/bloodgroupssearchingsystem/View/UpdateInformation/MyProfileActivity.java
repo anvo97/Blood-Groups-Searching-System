@@ -18,7 +18,9 @@ import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Model.Register.Customer;
 import com.example.an.bloodgroupssearchingsystem.Presenter.UpdateInformation.PresenterLogicUpdate;
 import com.example.an.bloodgroupssearchingsystem.R;
+import com.example.an.bloodgroupssearchingsystem.View.Login.LoginActivity;
 import com.github.florent37.shapeofview.shapes.CircleView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyProfileActivity extends AppCompatActivity implements View.OnClickListener,ViewUpdate{
     private EditText edtFullname,edtBirthday,edtPhoneNumber,edtGender,edtAddress;
     private CircleImageView imgAvatar;
-    private FrameLayout btnUpdate;
+    private FrameLayout btnUpdate,btnLogout;
     int PICK_IMAGE=1;
     private PresenterLogicUpdate presenterLogicUpdate;
     private SVProgressHUD mSvProgressHUD;
@@ -43,6 +45,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         imgAvatar.setOnClickListener(this);
         edtBirthday.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
         presenterLogicUpdate.LoadDataCustomer();
     }
 
@@ -54,6 +57,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         edtAddress=(EditText)findViewById(R.id.editAddress);
         imgAvatar=(CircleImageView) findViewById(R.id.imgAvatar);
         btnUpdate=(FrameLayout)findViewById(R.id.btnUpdate);
+        btnLogout=findViewById(R.id.btnLogout);
     }
     public void PickAvatar(){
         Intent intent=new Intent();
@@ -99,6 +103,12 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         if (v==btnUpdate){
             mSvProgressHUD.show();
             presenterLogicUpdate.ResovleUpdate(edtAddress,imgAvatar,edtFullname,edtBirthday,edtGender,edtPhoneNumber) ;
+        }
+        if (v==btnLogout){
+            FirebaseAuth.getInstance().signOut();
+            Intent intent=new Intent(MyProfileActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 

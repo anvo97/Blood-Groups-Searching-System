@@ -450,6 +450,7 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
                         finish();
                     }
                 })
+                .setCancelable(false)
                 .show();
     }
 
@@ -463,6 +464,7 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
 
                     }
                 })
+                .setCancelable(false)
                 .show();
     }
 
@@ -479,6 +481,7 @@ public class PhieuDangKy extends AppCompatActivity implements DonateView, View.O
                         finish();
                     }
                 })
+                .setCancelable(false)
                 .show();
     }
 

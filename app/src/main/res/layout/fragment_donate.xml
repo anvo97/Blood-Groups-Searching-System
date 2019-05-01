@@ -139,6 +139,7 @@
                 android:maxLines="1"
                 android:paddingLeft="115dp"
                 android:textColor="#FF9800"
+                android:maxLength="30"
                 android:textColorHint="#F1BB6B"
                 android:textSize="16dp" />
 
@@ -291,6 +292,7 @@
                 android:maxLines="1"
                 android:paddingLeft="115dp"
                 android:textColor="#FF9800"
+                android:maxLength="10"
                 android:textColorHint="#F1BB6B"
                 android:textSize="16dp" />
 
@@ -333,6 +335,7 @@
                 android:hint="Nhập email"
                 android:inputType="text"
                 android:lines="1"
+                android:maxLength="40"
                 android:maxLines="1"
                 android:paddingLeft="115dp"
                 android:textColor="#FF9800"
@@ -439,6 +442,7 @@
                 android:hint="Ex: sinh viên, nhân viên ..."
                 android:inputType="text"
                 android:lines="1"
+                android:maxLength="30"
                 android:maxLines="1"
                 android:paddingLeft="115dp"
                 android:textColor="#FF9800"
@@ -488,7 +492,9 @@
                 android:paddingLeft="115dp"
                 android:textColor="#FF9800"
                 android:textColorHint="#F1BB6B"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:maxLength="9"
+                />
 
         </RelativeLayout>
 

@@ -1,11 +1,13 @@
 package com.example.an.bloodgroupssearchingsystem.View.Search;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.card.MaterialCardView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.example.an.bloodgroupssearchingsystem.Presenter.Search.ListSearchAdap
 import com.example.an.bloodgroupssearchingsystem.Presenter.Search.SearchPresenter;
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.Donate.Event;
+import com.example.an.bloodgroupssearchingsystem.View.Donate.PhieuDangKy;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,13 +51,14 @@ public class SearchFragment extends Fragment implements SearchView {
     private SearchPresenter mainPresenter;
     private ListView listViewSearch;
     private Button btSearch;
-    private TextView txtResult, txtKetQua;
+    private TextView txtResult;
     private EditText edtKhac;
     private DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     private ArrayList<ListSearch> arrayListSearch;
     private ListSearchAdapter adapter;
     private RelativeLayout rlKhac;
     private SVProgressHUD mSvProgressHUD;
+    private boolean checkDialog = false;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -72,7 +76,6 @@ public class SearchFragment extends Fragment implements SearchView {
         listViewSearch = (ListView) view.findViewById(R.id.lvSearch);
         btSearch = (Button) view.findViewById(R.id.btn_search);
         txtResult = (TextView) view.findViewById(R.id.txt_Result);
-        txtKetQua = (TextView) view.findViewById(R.id.txt_KetQua);
         edtKhac = (EditText) view.findViewById(R.id.edt_Khac);
         rlKhac = (RelativeLayout) view.findViewById(R.id.rlKhac);
         mSvProgressHUD = new SVProgressHUD(getContext());
@@ -130,11 +133,16 @@ public class SearchFragment extends Fragment implements SearchView {
                 mSvProgressHUD.show();
                 btSearch.setEnabled(false);
                 listViewSearch.setAdapter(null);
-                if(edtKhac.length() == 0){
+                if (edtKhac.length() == 0 && spinnerSearchBlood.getSelectedItem().equals("Khác")) {
                     Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
                     mSvProgressHUD.dismiss();
                     btSearch.setEnabled(true);
-                }else {
+                } else if (edtKhac.length() != 0 && spinnerSearchBlood.getSelectedItem().equals("Khác")
+                        && checkName(edtKhac.getText().toString()) == 0) {
+                    dialogNhapSo();
+                    mSvProgressHUD.dismiss();
+                    btSearch.setEnabled(true);
+                } else {
                     getSearch();
                 }
                 txtResult.setVisibility(View.VISIBLE);
@@ -178,8 +186,7 @@ public class SearchFragment extends Fragment implements SearchView {
                                 && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
                                 && search.Amount > 0
                                 || edtKhac.getText().toString().toUpperCase().equals(search.BloodGroup)
-                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
-                                && search.Amount > 0) {
+                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
                     }
@@ -187,9 +194,9 @@ public class SearchFragment extends Fragment implements SearchView {
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
                 listViewSearch.setAdapter(adapter);
                 if (arrayListSearch.isEmpty()) {
-                    txtKetQua.setVisibility(View.VISIBLE);
+                    checkDialog = true;
                 } else {
-                    txtKetQua.setVisibility(View.INVISIBLE);
+
                 }
             }
 
@@ -217,10 +224,11 @@ public class SearchFragment extends Fragment implements SearchView {
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
                 listViewSearch.setAdapter(adapter);
-                if (arrayListSearch.isEmpty()) {
-                    txtKetQua.setVisibility(View.VISIBLE);
+                if (arrayListSearch.isEmpty() && checkDialog) {
+                    dialogKetQua();
+                    checkDialog = false;
                 } else {
-                    txtKetQua.setVisibility(View.INVISIBLE);
+
                 }
                 mSvProgressHUD.dismiss();
             }
@@ -231,6 +239,45 @@ public class SearchFragment extends Fragment implements SearchView {
             }
         });
         btSearch.setEnabled(true);
+    }
+
+    public void dialogKetQua() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Thông báo")
+                .setMessage("Không có kết quả.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public void dialogNhapSo() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Thông báo")
+                .setMessage("Không được nhập số.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    public int checkName(String name) {
+        int count = 0;
+        for (int i = 0; i < name.length(); i++) {
+            if (!Character.isAlphabetic(name.charAt(i)) && !Character.isWhitespace(name.charAt(i))) {
+                count++;
+            }
+        }
+        if (count > 0) return 0;
+        else return 1;
     }
 
 }

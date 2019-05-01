@@ -16,14 +16,18 @@ import com.example.an.bloodgroupssearchingsystem.View.Blood.ItemClickEventListen
 
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifImageView;
+
 class ViewHolderEvents extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView txtTitleEvens,txtextraContent,txtTimePost;
     ItemClickEventListener itemClickEventListener;
+    GifImageView gifImageView;
     public ViewHolderEvents(@NonNull View itemView) {
         super(itemView);
         txtTitleEvens=(TextView)itemView.findViewById(R.id.txtTitleEvens);
         txtextraContent=(TextView)itemView.findViewById(R.id.txtextraContent);
         txtTimePost=(TextView)itemView.findViewById(R.id.txtTimePost);
+        gifImageView=itemView.findViewById(R.id.gifImageView);
         itemView.setOnClickListener(this);
     }
 
@@ -58,6 +62,9 @@ public class EventsAdapter extends RecyclerView.Adapter<ViewHolderEvents> {
         viewHolderEvents.txtTitleEvens.setText(arrayEventList.get(i).getTitle());
         viewHolderEvents.txtTimePost.setText(arrayEventList.get(i).getTimePost());
         viewHolderEvents.txtextraContent.setText(arrayEventList.get(i).getContent());
+        if (i==0 || i==1){
+            viewHolderEvents.gifImageView.setVisibility(View.VISIBLE);
+        }
         viewHolderEvents.setItemClickevensListener(new ItemClickEventListener() {
             @Override
             public void onClick(View view, int position, boolean islongClick) {
@@ -67,6 +74,7 @@ public class EventsAdapter extends RecyclerView.Adapter<ViewHolderEvents> {
                 intent.putExtra("time",arrayEventList.get(position).getTime());
                 intent.putExtra("place",arrayEventList.get(position).getPlace());
                 intent.putExtra("content",arrayEventList.get(position).getContent());
+                intent.putExtra("name",arrayEventList.get(position).getName());
                 context.startActivity(intent);
             }
         });

@@ -37,12 +37,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * A simple {@link Fragment} subclass.
  */
 public class UserFragment extends Fragment implements ViewUpdate {
-    private FrameLayout btnMyProfile,btnChangePW,btnInformationBlood;
+    private FrameLayout btnMyProfile, btnChangePW, btnInformationBlood;
     private CircleImageView imgAvatarUser;
-    private TextView txtFullnameUser,txtEmailUser;
+    private TextView txtFullnameUser, txtEmailUser;
     private FirebaseUser user;
     private FirebaseAuth mAuth;
-    private PresenterLogicUpdate presenterLogicUpdate=new PresenterLogicUpdate(this);
+    private PresenterLogicUpdate presenterLogicUpdate = new PresenterLogicUpdate(this);
 
     public UserFragment() {
         // Required empty public constructor
@@ -52,18 +52,18 @@ public class UserFragment extends Fragment implements ViewUpdate {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_user,container, false);
-        btnMyProfile=(FrameLayout)view.findViewById(R.id.btnMyProfile);
-        btnChangePW=(FrameLayout)view.findViewById(R.id.btnChangePW);
-        btnInformationBlood=(FrameLayout)view.findViewById(R.id.btnInformationBlood);
-        imgAvatarUser=(CircleImageView)view.findViewById(R.id.imgAvatarUser);
-        txtFullnameUser=(TextView)view.findViewById(R.id.txtFullnameUser);
-        txtEmailUser=(TextView)view.findViewById(R.id.txtEmailUser);
-        user= FirebaseAuth.getInstance().getCurrentUser();
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        btnMyProfile = (FrameLayout) view.findViewById(R.id.btnMyProfile);
+        btnChangePW = (FrameLayout) view.findViewById(R.id.btnChangePW);
+        btnInformationBlood = (FrameLayout) view.findViewById(R.id.btnInformationBlood);
+        imgAvatarUser = (CircleImageView) view.findViewById(R.id.imgAvatarUser);
+        txtFullnameUser = (TextView) view.findViewById(R.id.txtFullnameUser);
+        txtEmailUser = (TextView) view.findViewById(R.id.txtEmailUser);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         btnMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(container.getContext(),MyProfileActivity.class);
+                Intent intent = new Intent(container.getContext(), MyProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,7 +77,7 @@ public class UserFragment extends Fragment implements ViewUpdate {
         btnInformationBlood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
             }
         });
         presenterLogicUpdate.LoadDataCustomer();
@@ -105,6 +105,7 @@ public class UserFragment extends Fragment implements ViewUpdate {
         txtFullnameUser.setText(customer.getFullname());
         txtEmailUser.setText(user.getEmail());
     }
+
     private void DialogChangePW() {
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_changepw_customs);
@@ -115,31 +116,26 @@ public class UserFragment extends Fragment implements ViewUpdate {
             @Override
             public void onClick(View v) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(edtNewPW.getText().toString().equals("")|| edtVerifyPW.getText().toString().equals(""))
-                {
+                if (edtNewPW.getText().toString().equals("") || edtVerifyPW.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    if(!edtNewPW.getText().toString().equals(edtVerifyPW.getText().toString()))
-                    {
+                } else {
+                    if (!edtNewPW.getText().toString().equals(edtVerifyPW.getText().toString())) {
                         Toast.makeText(getContext(), "Mật khẩu mới không khớp", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        user.updatePassword(edtNewPW.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    Toast.makeText(getContext(), "cập nhật thành công", Toast.LENGTH_SHORT).show();
-                                    Intent intent=new Intent(getContext(),LoginActivity.class);
-                                    startActivity(intent);
-
-                                }else {
-                                    Toast.makeText(getContext(), "cập nhật thất bại", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                    } else {
+                        String newPassword = edtNewPW.getText().toString();
+                        user.updatePassword(newPassword)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getContext(), LoginActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                     }
 
                 }

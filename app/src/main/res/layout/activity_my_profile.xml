@@ -233,11 +233,33 @@
                 android:textColor="@color/colorwhite"
                 android:id="@+id/txtUpdate"
                 android:layout_gravity="center"
-                android:text="Update"
+                android:text="Cập nhật"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ProgressBar
                 android:id="@+id/progressbarUpdate"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btnLogout"
+            android:background="@drawable/custom_button_login"
+            android:layout_width="300dp"
+            android:layout_height="40dp">
+            <TextView
+                android:textColor="@color/colorwhite"
+                android:id="@+id/txtLogout"
+                android:layout_gravity="center"
+                android:text="Đăng xuất"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/progressbarLogout"
                 android:visibility="invisible"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"

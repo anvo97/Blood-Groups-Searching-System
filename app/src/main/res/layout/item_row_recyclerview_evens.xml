@@ -45,10 +45,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifImageView"
                         android:layout_marginLeft="20dp"
                         android:layout_width="30dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/icon_new"/>
+                        android:src="@drawable/icon_new"
+                        android:visibility="invisible"/>
                 </LinearLayout>
                
             </LinearLayout>

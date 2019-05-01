@@ -33,6 +33,16 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/text_name_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/backgroud_end"
+                android:textStyle="bold"/>
             <View
                 android:background="#070707"
                 android:layout_width="match_parent"
@@ -122,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="▪Bước 2:Xác nhận đăng ký hiến máu và đợi phản hồi của nhân viên trong email của bạn"/>
+                    android:text="▪Bước 3:Xác nhận đăng ký hiến máu và đợi phản hồi của nhân viên trong email của bạn"/>
 
                 <View
                     android:background="#070707"

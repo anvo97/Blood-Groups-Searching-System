@@ -11,7 +11,7 @@
         android:layout_width="256dp"
         android:layout_height="49dp"
         android:ems="10"
-        android:hint="New Password"
+        android:hint="mật khẩu mới"
         android:inputType="textPassword" />
 
     <EditText
@@ -19,7 +19,7 @@
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Verify Password"
+        android:hint="xác nhận mật khẩu"
         android:inputType="textPassword"
         />
 
@@ -27,7 +27,7 @@
         android:id="@+id/btnSave"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
-        android:text="Change Password"
+        android:text="Đổi mật khẩu"
         />
 
 </LinearLayout>

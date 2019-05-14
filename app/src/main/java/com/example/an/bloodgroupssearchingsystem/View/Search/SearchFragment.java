@@ -186,9 +186,14 @@ public class SearchFragment extends Fragment implements SearchView {
                                 && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
                                 && search.Amount > 0
                                 || edtKhac.getText().toString().toUpperCase().equals(search.BloodGroup)
-                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])) {
+                                && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])
+                        ) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
+                    }
+                    if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
+                            && spinnerSearchCounty.getSelectedItem().toString().equals(" ALL")) {
+                        arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                     }
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);
@@ -220,6 +225,10 @@ public class SearchFragment extends Fragment implements SearchView {
                                 && spinnerSearchCounty.getSelectedItem().toString().equals(arr[i])) {
                             arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                         }
+                    }
+                    if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
+                            && spinnerSearchCounty.getSelectedItem().toString().equals(" ALL")) {
+                        arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                     }
                 }
                 adapter = new ListSearchAdapter(getContext(), R.layout.dong_list_search, arrayListSearch);

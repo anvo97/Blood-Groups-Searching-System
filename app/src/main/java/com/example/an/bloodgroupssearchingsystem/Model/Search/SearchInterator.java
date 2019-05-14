@@ -45,7 +45,7 @@ public class SearchInterator {
         arrayList.add(new String(" SƠN TRÀ"));
         arrayList.add(new String(" HÒA VANG"));
         arrayList.add(new String(" HOÀNG SA"));
-
+        arrayList.add(new String(" ALL"));
 
         LoadSearchListener.onLoadSearchSuccess2(arrayList);
     }

@@ -21,7 +21,7 @@
         android:id="@+id/txt_Note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Bạn hãy cung cấp Mã đăng ký hiến máu cho nhân viên của viện khi bạn tới hiến máu)"
+        android:text="(Bạn hãy cung cấp Mã đăng ký hiến máu cho nhân viên của bệnh viện khi bạn tới hiến máu)"
         android:layout_below="@id/txt_Tittle"
         android:layout_centerHorizontal="true"
         android:textColor="#000"

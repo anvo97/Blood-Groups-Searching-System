@@ -326,6 +326,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
                     }
                     if (checkQuan) {
                         Toast.makeText(getContext(), "Không hợp lệ", Toast.LENGTH_SHORT).show();
+                        checkQuan = false;
                     } else {
                         String strStreet = edtStreet.getText().toString().toUpperCase();
                         String strPhuong = edtPhuong.getText().toString().toUpperCase();

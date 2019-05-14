@@ -1,6 +1,7 @@
 package com.example.an.bloodgroupssearchingsystem.View.Search;
 
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,10 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -59,6 +62,8 @@ public class SearchFragment extends Fragment implements SearchView {
     private RelativeLayout rlKhac;
     private SVProgressHUD mSvProgressHUD;
     private boolean checkDialog = false;
+    private FrameLayout main;
+    private String regexStr = "^[0-9]*$";
 
     public SearchFragment() {
         // Required empty public constructor
@@ -77,6 +82,7 @@ public class SearchFragment extends Fragment implements SearchView {
         btSearch = (Button) view.findViewById(R.id.btn_search);
         txtResult = (TextView) view.findViewById(R.id.txt_Result);
         edtKhac = (EditText) view.findViewById(R.id.edt_Khac);
+        main = (FrameLayout) view.findViewById(R.id.main);
         rlKhac = (RelativeLayout) view.findViewById(R.id.rlKhac);
         mSvProgressHUD = new SVProgressHUD(getContext());
         mSvProgressHUD.show();
@@ -127,9 +133,17 @@ public class SearchFragment extends Fragment implements SearchView {
             }
         });
 
+        main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard(edtKhac);
+            }
+        });
+
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyBoard(edtKhac);
                 mSvProgressHUD.show();
                 btSearch.setEnabled(false);
                 listViewSearch.setAdapter(null);
@@ -138,7 +152,7 @@ public class SearchFragment extends Fragment implements SearchView {
                     mSvProgressHUD.dismiss();
                     btSearch.setEnabled(true);
                 } else if (edtKhac.length() != 0 && spinnerSearchBlood.getSelectedItem().equals("Khác")
-                        && checkName(edtKhac.getText().toString()) == 0) {
+                        && edtKhac.getText().toString().trim().matches(regexStr)) {
                     dialogNhapSo();
                     mSvProgressHUD.dismiss();
                     btSearch.setEnabled(true);
@@ -192,6 +206,8 @@ public class SearchFragment extends Fragment implements SearchView {
                         }
                     }
                     if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
+                            && spinnerSearchCounty.getSelectedItem().toString().equals(" ALL")
+                            || edtKhac.getText().toString().toUpperCase().equals(search.BloodGroup)
                             && spinnerSearchCounty.getSelectedItem().toString().equals(" ALL")) {
                         arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                     }
@@ -227,6 +243,8 @@ public class SearchFragment extends Fragment implements SearchView {
                         }
                     }
                     if (spinnerSearchBlood.getSelectedItem().toString().equals(search.BloodGroup)
+                            && spinnerSearchCounty.getSelectedItem().toString().equals(" ALL")
+                            || edtKhac.getText().toString().toUpperCase().equals(search.BloodGroup)
                             && spinnerSearchCounty.getSelectedItem().toString().equals(" ALL")) {
                         arrayListSearch.add(new ListSearch(listSearch.getName(), listSearch.getPhone()));
                     }
@@ -281,12 +299,17 @@ public class SearchFragment extends Fragment implements SearchView {
     public int checkName(String name) {
         int count = 0;
         for (int i = 0; i < name.length(); i++) {
-            if (!Character.isAlphabetic(name.charAt(i)) && !Character.isWhitespace(name.charAt(i))) {
+            if (!Character.isDigit(name.charAt(i))) {
                 count++;
             }
         }
         if (count > 0) return 0;
         else return 1;
+    }
+
+    public void hideKeyBoard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 }

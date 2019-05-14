@@ -3,6 +3,7 @@ package com.example.an.bloodgroupssearchingsystem.View.Login;
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -78,9 +79,13 @@ public class LoginActivity extends AppCompatActivity implements ViewLogin,View.O
 
     @Override
     public void onClick(View v) {
-        final WifiManager wifi = (WifiManager)getApplicationContext().getSystemService(WIFI_SERVICE);
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+                .isConnectedOrConnecting();
+        boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+                .isConnectedOrConnecting();
         if(v==btnLogin){
-            if(wifi.isWifiEnabled()){
+            if(is3g || isWifi){
                 presenterLogicLogin.ResolveLogin(edtUserName.getText().toString(),edtPassword.getText().toString());
                 if(checkinput==false){
                     AnimatorButton();
@@ -90,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements ViewLogin,View.O
             else {
                 AlertDialog.Builder alert =new AlertDialog.Builder(LoginActivity.this);
                 alert.setTitle("Thông báo");
-                alert.setMessage("Vui lòng mở wifi trước khi đăng nhập vào ứng dụng");
+                alert.setMessage("Vui lòng mở mạng trước khi đăng nhập vào ứng dụng");
                 alert.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

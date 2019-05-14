@@ -25,6 +25,7 @@
         <activity android:name=".View.Register.RegisterActivity" />
         <activity
             android:name=".View.Menu.MenuActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

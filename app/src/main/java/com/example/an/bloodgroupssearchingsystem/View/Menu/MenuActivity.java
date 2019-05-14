@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,6 +41,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     private SearchFragment searchFragment;
     private NewsFragment newsFragment;
@@ -48,6 +51,7 @@ public class MenuActivity extends AppCompatActivity {
     private DonateFragment donateFragment;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +80,17 @@ public class MenuActivity extends AppCompatActivity {
         userFragment = new UserFragment();
         donateFragment = new DonateFragment();
 
-
-        setFratment(searchFragment);
+        sharedPreferences = getApplicationContext().getSharedPreferences("SETMENU", getApplicationContext().MODE_PRIVATE);
+        int bienMenu = sharedPreferences.getInt("bienMenu", 0);
+        if (bienMenu == 2) {
+            setFratment(donateFragment);
+            bienMenu = 0;
+            editor = sharedPreferences.edit();
+            editor.putInt("bienMenu",bienMenu);
+            editor.commit();
+        } else {
+            setFratment(searchFragment);
+        }
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

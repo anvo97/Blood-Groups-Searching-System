@@ -4,7 +4,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.example.an.bloodgroupssearchingsystem.Model.Blood.Events;
 import com.example.an.bloodgroupssearchingsystem.R;
@@ -40,7 +43,10 @@ public class EvensNotificationHelper extends NotificationHelper {
                 .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setShowWhen(false)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.drawable.imgblood))
+                .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle())
                 .setAutoCancel(true)
+                .setColor(ContextCompat.getColor(context,R.color.backgroud_end))
                 .setContentIntent(resultPedingIntent)
                 .setVisibility(VISIBILITY_PUBLIC);
         mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

@@ -44,4 +44,5 @@ public class NotificationHelper {
             Log.e(TAG, "Error post notification :", e);
         }
     }
+
 }

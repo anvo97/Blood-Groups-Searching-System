@@ -1,6 +1,7 @@
 package com.example.an.bloodgroupssearchingsystem.View.Blood;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,11 +11,15 @@ import android.widget.TextView;
 
 import com.example.an.bloodgroupssearchingsystem.R;
 import com.example.an.bloodgroupssearchingsystem.View.Donate.DonateFragment;
+import com.example.an.bloodgroupssearchingsystem.View.Menu.MenuActivity;
 
 public class DetailEventActivity extends AppCompatActivity implements View.OnClickListener {
     private Button button_register_event;
     private TextView text_Title_name_event, text_Time_Event, text_place_Event, text_content_event, text_name_events;
     private String mTitle, mPlace, mTime, mContent, mName;
+    private int bienMenu;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,12 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v == button_register_event) {
-
+            bienMenu = 2;
+            sharedPreferences = getApplicationContext().getSharedPreferences("SETMENU",getApplicationContext().MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            editor.putInt("bienMenu", bienMenu);
+            editor.commit();
+            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
         }
     }
 }

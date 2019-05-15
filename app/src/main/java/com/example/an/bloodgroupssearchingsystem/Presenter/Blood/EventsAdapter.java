@@ -61,7 +61,7 @@ public class EventsAdapter extends RecyclerView.Adapter<ViewHolderEvents> {
     public void onBindViewHolder(@NonNull ViewHolderEvents viewHolderEvents, int i) {
         viewHolderEvents.txtTitleEvens.setText(arrayEventList.get(i).getTitle());
         viewHolderEvents.txtTimePost.setText(arrayEventList.get(i).getTimePost());
-        viewHolderEvents.txtextraContent.setText(arrayEventList.get(i).getContent());
+        viewHolderEvents.txtextraContent.setText(android.text.Html.fromHtml(arrayEventList.get(i).getContent()));
         if (i==0 || i==1){
             viewHolderEvents.gifImageView.setVisibility(View.VISIBLE);
         }

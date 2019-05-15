@@ -20,16 +20,13 @@ public class ModelBlood {
         this.loadEvensLister=loadEvensLister;
     }
     public void getDataEvents(){
-        mDatabase.child("Event").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Event-text").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayEventList.clear();
                 Iterable<DataSnapshot> nodeChild = dataSnapshot.getChildren();
                 for (DataSnapshot chile:nodeChild){
                     Events events=chile.getValue(Events.class);
-                    events.setContent(chile.child("Detail").child("content").getValue().toString());
-                    events.setPlace(chile.child("Detail").child("place").getValue().toString());
-                    events.setTime(chile.child("Detail").child("Time").getValue().toString());
                     events.setId(chile.getKey());
                     arrayEventList.add(events);
                 }

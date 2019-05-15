@@ -32,9 +32,11 @@ public class ModelNews {
                 for (DataSnapshot chile:nodeChild){
                     News news=chile.getValue(News.class);
                     news.setId(chile.getKey());
+                    Log.d("BBB",chile.getValue().toString());
                     listNews.add(news);
                 }
                 Log.d("AAA",listNews.get(0).getTitle());
+                Log.d("AAA",listNews.get(0).getLocalhost());
                 Collections.reverse(listNews);
                 loadNewsLister.onLoadNewsSuccess(listNews); //day nek cho lay du lieu ra
             }

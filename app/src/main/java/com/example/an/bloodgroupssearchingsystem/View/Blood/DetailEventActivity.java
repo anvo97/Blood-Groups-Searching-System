@@ -33,7 +33,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
         mTime = i.getStringExtra("time");
         mName = i.getStringExtra("name");
         text_Title_name_event.setText(mTitle);
-        text_content_event.setText(mContent);
+        text_content_event.setText(android.text.Html.fromHtml(mContent));
         text_place_Event.setText(mPlace);
         text_Time_Event.setText(mTime);
         text_name_events.setText(mName);

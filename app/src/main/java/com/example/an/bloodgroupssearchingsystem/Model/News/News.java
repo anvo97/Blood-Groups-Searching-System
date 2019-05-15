@@ -9,8 +9,12 @@ public class News {
     private String content;
     private String TitleImage;
     private String ImageDetail;
+    private String localhost;
 
-    public News(String id, String title, String time, String image, String classify, String idDetail, String content, String titleImage, String imageDetail) {
+    public News() {
+    }
+
+    public News(String id, String title, String time, String image, String classify, String idDetail, String content, String titleImage, String imageDetail, String localhost) {
         this.id = id;
         Title = title;
         Time = time;
@@ -20,10 +24,7 @@ public class News {
         this.content = content;
         TitleImage = titleImage;
         ImageDetail = imageDetail;
-    }
-
-    public News(){
-        //danh cho lay du lieu firebase
+        this.localhost = localhost;
     }
 
     public String getId() {
@@ -96,5 +97,13 @@ public class News {
 
     public void setImageDetail(String imageDetail) {
         ImageDetail = imageDetail;
+    }
+
+    public String getLocalhost() {
+        return localhost;
+    }
+
+    public void setLocalhost(String localhost) {
+        this.localhost = localhost;
     }
 }

@@ -40,7 +40,7 @@ public class EvensNotificationHelper extends NotificationHelper {
                 .setSmallIcon(R.drawable.ic_airline_seat_flat_while_24dp)
                 .setChannelId(NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(name)
-                .setContentText(content)
+                .setContentText(android.text.Html.fromHtml(content))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setShowWhen(false)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.drawable.imgblood))

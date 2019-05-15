@@ -35,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PresenterLogicUpdate implements PresenterImpUpdate, LoadInformationCustomer {
     private ViewUpdate viewUpdate;
-    private ModelUpdate modelUpdate=new ModelUpdate();
+    private ModelUpdate modelUpdate;
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();

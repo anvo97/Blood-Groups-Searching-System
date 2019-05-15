@@ -43,17 +43,18 @@ public class EvensService extends Service {
         super.onCreate();
         evensNotificationHelper=new EvensNotificationHelper(getApplicationContext());
         Log.d("AAA","onCreate");
-        mDatabase.child("Event").addChildEventListener(new ChildEventListener() {
+        mDatabase.child("Event-text").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @android.support.annotation.Nullable String s) {
+                Log.d("AAA","co tin moi");
                 if (s!=null){
                     status=dataSnapshot.child("Status").getValue().toString();
                     if (status.equals("false"))
                     {
                         String title = dataSnapshot.child("Title").getValue().toString();
-                        String content = dataSnapshot.child("Detail").child("content").getValue().toString().substring(0,69)+"...";
+                        String content = dataSnapshot.child("content").getValue().toString().substring(0,69)+"...";
                         evensNotificationHelper.ActionNotification(title,content);
-                        mDatabase.child("Event").child(dataSnapshot.getKey()).child("Status").setValue("true");
+                        mDatabase.child("Event-text").child(dataSnapshot.getKey()).child("Status").setValue("true");
                     }
                 }
             }

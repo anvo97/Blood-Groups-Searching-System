@@ -133,7 +133,7 @@ public class DonateFragment extends Fragment implements View.OnClickListener, Do
         spinnerListSuKien = (Spinner) view.findViewById(R.id.spinnerSuKien);
         arraySpinnerSuKien = new ArrayList<String>();
 
-        mData.child("Event").addListenerForSingleValueEvent(new ValueEventListener() {
+        mData.child("Event-text").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> nodeChild = dataSnapshot.getChildren();

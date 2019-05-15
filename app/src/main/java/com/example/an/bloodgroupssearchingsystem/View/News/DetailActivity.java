@@ -1,6 +1,7 @@
 package com.example.an.bloodgroupssearchingsystem.View.News;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.example.an.bloodgroupssearchingsystem.Model.News.Detail;
 import com.example.an.bloodgroupssearchingsystem.Model.News.News;
 import com.example.an.bloodgroupssearchingsystem.Presenter.News.PresenterLogicNews;
@@ -27,6 +29,7 @@ import java.util.Collections;
 public class DetailActivity extends AppCompatActivity implements ViewDetailNews {
     private RecyclerView recyclerView;
     private WebView mWebView;
+    private SVProgressHUD mSvProgressHUD;
     String localhost;
     private DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
     PresenterLogicNews presenterLogicNews=new PresenterLogicNews(this);
@@ -36,6 +39,8 @@ public class DetailActivity extends AppCompatActivity implements ViewDetailNews 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        mSvProgressHUD=new SVProgressHUD(this);
+        mSvProgressHUD.show();
         recyclerView=(RecyclerView)findViewById(R.id.lvDetailnews) ;
         txtTitleDetail=(TextView)findViewById(R.id.txtTitleDetail);
         txtTimeDetail=(TextView)findViewById(R.id.txtTimeDetail);
@@ -52,6 +57,8 @@ public class DetailActivity extends AppCompatActivity implements ViewDetailNews 
                 localhost=dataSnapshot.getValue().toString();
                 mWebView.setWebViewClient(new WebViewClient());
                 mWebView.loadUrl(localhost);
+                SystemClock.sleep(2000);
+                mSvProgressHUD.dismiss();
             }
 
             @Override
